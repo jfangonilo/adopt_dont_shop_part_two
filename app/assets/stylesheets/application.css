@@ -1,0 +1,84 @@
+body {
+  background-color: white;
+  font-family: "Numans";
+}
+
+h1 {
+  text-align: center;
+  font-size: 3em;
+  color: black;
+}
+
+a {
+  color: black;
+  padding: 1em;
+ }
+
+.topnav {
+  margin: auto;
+  overflow: hidden;
+  text-align: center;
+  font-size: 2em;
+  color: black;
+}
+
+.topnav a {
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: darkgray;
+  color: white;
+}
+
+.wrapper {
+  border: solid;
+  border-radius: 12px;
+  border-color: #002244;
+  text-align: center;
+  background-color: #eee;
+}
+
+.pet-container {
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: repeat(2, 2fr 1fr 1fr);
+  grid-auto-rows: minmax(50px, auto);
+}
+
+.shelter-links {
+  display: inline-block;
+}
+
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #aaa;
+}
+
+form {
+  align-content: center;
+  padding: 20px;
+}

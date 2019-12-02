@@ -1,0 +1,19 @@
+<section class = "wrapper">
+  <h1><%= @pet.name %></h1>
+  <%= image_tag @pet.image %>
+  <p><%= @pet.description %><p>
+  <p><%= @pet.approximate_age %> y/o <%= @pet.sex %></p>
+  <% if @pet.adoptable? %>
+    <section id="adoptable-status">
+      <p>Adoptable</p>
+    </section>
+    <p><%= link_to "Change to Adoption Pending", "/pets/#{@pet.id}/pending", method: "patch" %></p>
+  <% else %>
+    <section id="adoptable-status">
+      <p>Adoption Pending</p>
+    </section>
+    <p><%= link_to "Change to Adoptable", "/pets/#{@pet.id}/pending", method: "patch" %></p>
+  <% end %>
+  <p><%= link_to "Update", "/pets/#{@pet.id}/edit" %>
+  <%= link_to "Delete", "/pets/#{@pet.id}", method: "delete" %></p>
+</section>
