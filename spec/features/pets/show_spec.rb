@@ -2,27 +2,12 @@ require 'rails_helper'
 
 describe "When I visit /pets/:id," do
   before :each do
-    shelter_1 = Shelter.create!(
-      name:     "Winterfell",
-      address:  "6303 W Exposition Ave",
-      city:     "Lakewood",
-      state:    "CO",
-      zip:      "80226"
-    )
-
-    @pet = shelter_1.pets.create!(
-      image:            "https://www.allthingsdogs.com/wp-content/uploads/2018/12/Husky-Names-Feature.jpg",
-      name:             "Seamus",
-      approximate_age:  8,
-      sex:              "male",
-      description:      "Winter is Coming; dog"
-    )
-
+    @pet = create(:random_pet)
     visit "/pets/#{@pet.id}"
   end
 
   it "I see the pet with that id" do
-    expect(page).to have_css "img[src *= 'Husky-Names-Feature.jpg']"
+    expect(page).to have_css "img[src = '#{@pet.image}']"
     expect(page).to have_content @pet.name
     expect(page).to have_content @pet.approximate_age
     expect(page).to have_content @pet.sex
@@ -40,7 +25,7 @@ describe "When I visit /pets/:id," do
     click_link "Delete"
 
     expect(current_path).to eq "/pets"
-    expect(page).to_not have_css "img[src *= 'Husky-Names-Feature.jpg']"
+    expect(page).to_not have_css "img[src = '#{@pet.image}']"
     expect(page).to_not have_content @pet.name
     expect(page).to_not have_content @pet.approximate_age
     expect(page).to_not have_content @pet.sex
