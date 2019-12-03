@@ -2,36 +2,11 @@ require 'rails_helper'
 
 describe Shelter, type: :model do
   before :each do
-    @shelter_1 = Shelter.create!(
-      name:     "Winterfell",
-      address:  "6303 W Exposition Ave",
-      city:     "Lakewood",
-      state:    "CO",
-      zip:      "80226"
-    )
+    @shelter_1 = create(:random_shelter, name: "Winterfell")
+    @shelter_2 = create(:random_shelter, name: "Sunspear")
 
-    @pet_1 = @shelter_1.pets.create!(
-      image:            "string",
-      name:             "Seamus",
-      approximate_age:  8,
-      sex:              "M",
-      description:      "Winter is Coming, dog"
-    )
-    @pet_2 = @shelter_1.pets.create(
-      image:            "https://www.catster.com/wp-content/uploads/2018/03/Calico-cat.jpg",
-      name:             "Miso",
-      approximate_age:  2,
-      sex:              "female",
-      description:      "Winter is Coming; cat"
-    )
-
-    @shelter_2 = Shelter.create(
-      name:     "Sunspear",
-      address:  "12322 Bohannon Blvd",
-      city:     "Orlando",
-      state:    "FL",
-      zip:      "32824"
-    )
+    @pet_1 = create(:random_pet, shelter: @shelter_1)
+    @pet_2 = create(:random_pet, shelter: @shelter_1)
   end
 
   describe "validations" do
