@@ -6,6 +6,7 @@ class Shelter < ApplicationRecord
   validates_presence_of :zip
 
   has_many :pets
+  has_many :shelter_reviews
 
   def pet_count
     pets.length

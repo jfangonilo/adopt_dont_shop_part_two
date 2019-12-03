@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191123184407) do
+ActiveRecord::Schema.define(version: 20191203155228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,17 @@ ActiveRecord::Schema.define(version: 20191123184407) do
     t.index ["shelter_id"], name: "index_pets_on_shelter_id"
   end
 
+  create_table "shelter_reviews", force: :cascade do |t|
+    t.string "title"
+    t.integer "rating"
+    t.string "content"
+    t.string "picture", default: "https://s3.amazonaws.com/petfinder-us-east-1-petimages-prod/organization-photos/34184/34184-2.jpg?bust=2018-04-13+01%3A36%3A57"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "shelter_id"
+    t.index ["shelter_id"], name: "index_shelter_reviews_on_shelter_id"
+  end
+
   create_table "shelters", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -37,4 +48,5 @@ ActiveRecord::Schema.define(version: 20191123184407) do
   end
 
   add_foreign_key "pets", "shelters", on_delete: :cascade
+  add_foreign_key "shelter_reviews", "shelters"
 end
