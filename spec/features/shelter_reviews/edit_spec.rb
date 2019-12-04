@@ -3,6 +3,8 @@ require "rails_helper"
 describe "shelter edit page" do
   before :each do
     @review = create(:random_shelter_review)
+
+    visit "shelters/#{@review.shelter.id}/shelter_reviews/#{@review.id}/edit"
   end
 
   it "can update a shelter" do
