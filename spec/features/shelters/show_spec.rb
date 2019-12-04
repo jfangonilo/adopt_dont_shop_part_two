@@ -66,9 +66,9 @@ describe "As a visitor, when I visit /shelters/:id," do
     end
 
       expect(current_path).to eq "/shelters/#{@shelter_1.id}"
-      expect(page).not_to have_content(@review[0].title)
-      expect(page).not_to have_content(@review[0].rating)
-      expect(page).not_to have_content(@review[0].content)
-      expect(page).not_to have_content(@review[0].picture)
+      expect(page).not_to have_content(@reviews[0].title)
+      expect(page).not_to have_content(@reviews[0].rating)
+      expect(page).not_to have_content(@reviews[0].content)
+      expect(page).not_to have_content(@reviews[0].picture)
   end
 end
