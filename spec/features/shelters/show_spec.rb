@@ -40,7 +40,7 @@ describe "As a visitor, when I visit /shelters/:id," do
   it "I can create a new shelter review" do
     click_link "Add a Review"
 
-    expect(current_path).to eq("/shelters/#{shelter_1.id}/shelter_reviews/new")
+    expect(current_path).to eq("/shelters/#{@shelter_1.id}/shelter_reviews/new")
     expect(page).to have_content("Add a Review")
 
     review_title = "Best shelter ever!"
@@ -55,7 +55,7 @@ describe "As a visitor, when I visit /shelters/:id," do
 
     click_button "Submit Review"
 
-    expect(current_path).to eq("/shelters/#{shelter_1.id}")
+    expect(current_path).to eq("/shelters/#{@shelter_1.id}")
 
     expect(page).to have_content(review_title)
     expect(page).to have_content(review_rating)
