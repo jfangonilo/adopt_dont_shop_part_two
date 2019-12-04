@@ -39,9 +39,7 @@ describe "As a visitor, when I visit the shelters index page," do
 
   it "I can sort alphhabetically" do
     expect(page.body.index("Winterfell")).to be < page.body.index("Sunspear")
-
     click_link "Sort Alphabetically"
-    
     expect(page.body.index("Sunspear")).to be < page.body.index("Winterfell")
   end
 end

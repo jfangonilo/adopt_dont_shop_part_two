@@ -1,7 +1,7 @@
 class ShelterReviewsController < ApplicationController
 
   def new
-    @shelter = Shelter.find(params[:shelter_id])
+    @shelter_id = params[:shelter_id]
   end
 
   def create
@@ -13,7 +13,7 @@ class ShelterReviewsController < ApplicationController
   end
 
   def edit
-    @review = ShelterReview.find(params[:shelter_review_id])
+    @shelter_id = params[:shelter_id]
   end
 
   def destroy

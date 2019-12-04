@@ -8,11 +8,11 @@ describe "As a visitor, when I go to /pet/:id/edit," do
   end
 
   it "I can fill out a form to update the pet and get redirected to that pet's page" do
-    image =             "https://heavyeditorial.files.wordpress.com/2019/04/ghost.jpg"
-    name =              "Ghost"
-    description =       "Winter is Here; Direwolf"
-    approximate_age =   5
-    sex =               "Male"
+    image           = "https://heavyeditorial.files.wordpress.com/2019/04/ghost.jpg"
+    name            = "Ghost"
+    description     = "Winter is Here; Direwolf"
+    approximate_age = 5
+    sex             = "Male"
 
     fill_in 'image',            with: image
     fill_in 'name',             with: name
@@ -33,5 +33,4 @@ describe "As a visitor, when I go to /pet/:id/edit," do
     expect(page).not_to have_content @pet.description
     expect(page).not_to have_content @pet.approximate_age
   end
-
 end
