@@ -19,10 +19,16 @@ describe "shelter edit page" do
     click_button "Update"
 
     expect(current_path).to eq "/shelters/#{@review.shelter.id}"
-    expect(page).to have_content @review.title
-    expect(page).to have_content @review.rating
-    expect(page).to have_content @review.content
-    expect(page).to have_css "img[src = '#{@review.picture}']"
+
+    expect(page).to have_content title
+    expect(page).to have_content rating
+    expect(page).to have_content content
+    expect(page).to have_css "img[src = '#{picture}']"
+    
+    expect(page).not_to have_content @review.title
+    expect(page).not_to have_content @review.rating
+    expect(page).not_to have_content @review.content
+    expect(page).not_to have_css "img[src = '#{@review.picture}']"
   end
 
   it "flashes a message when user doesn't fill out a field" do
