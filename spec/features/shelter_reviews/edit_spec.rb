@@ -3,7 +3,6 @@ require "rails_helper"
 describe "shelter edit page" do
   before :each do
     @review = create(:random_shelter_review)
-    
     visit "shelters/#{@review.shelter_id}/shelter_reviews/#{@review.id}/edit"
   end
 
@@ -19,7 +18,7 @@ describe "shelter edit page" do
     fill_in "picture",  with: picture
     click_button "Update"
 
-    expect(current_path).to eq "shelters/#{@review.shelter.id}"
+    expect(current_path).to eq "/shelters/#{@review.shelter.id}"
     expect(page).to have_content @review.title
     expect(page).to have_content @review.rating
     expect(page).to have_content @review.content
