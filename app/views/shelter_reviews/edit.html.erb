@@ -1,5 +1,5 @@
 <section class = "wrapper">
-  <%= form_tag "/shelters/#{@review.shelter_id}/shelter_reviews/#{@review.id}", method: :patch do %>
+  <%= form_tag "/shelters/#{@shelter_id}/shelter_reviews/#{@review_id}", method: :patch do %>
     <%= label_tag :title %>
     <%= text_field_tag :title %><br>
 
