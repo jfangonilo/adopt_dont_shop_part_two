@@ -24,4 +24,11 @@ describe "shelter edit page" do
     expect(page).to have_content @review.content
     expect(page).to have_css "img[src = '#{@review.picture}']"
   end
+
+  it "flashes a message when user doesn't fill out a field" do
+    click_button "Update"
+
+    expect(page).to have_content "Please fill out all fields"
+    expect(page).to have_button "Update"
+  end
 end
