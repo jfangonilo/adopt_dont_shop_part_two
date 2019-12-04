@@ -64,10 +64,9 @@ describe "As a visitor, when I visit /shelters/:id," do
     within "#review-#{@reviews[0].id}" do
       click_link "Delete Review"
     end
-
+    
       expect(current_path).to eq "/shelters/#{@shelter_1.id}"
       expect(page).not_to have_content(@reviews[0].title)
-      expect(page).not_to have_content(@reviews[0].rating)
       expect(page).not_to have_content(@reviews[0].content)
       expect(page).not_to have_content(@reviews[0].picture)
   end
