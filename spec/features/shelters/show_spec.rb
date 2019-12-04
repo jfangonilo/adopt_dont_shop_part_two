@@ -5,7 +5,7 @@ describe "As a visitor, when I visit /shelters/:id," do
     @shelter_1  = create(:random_shelter)
     @pet        = create(:random_pet, shelter: @shelter_1)
     @reviews    = create_list(:random_shelter_review, 3, shelter: @shelter_1)
-  
+
     visit "shelters/#{@shelter_1.id}"
   end
 
@@ -58,5 +58,16 @@ describe "As a visitor, when I visit /shelters/:id," do
 
       expect(current_path).to eq "/shelters/#{@shelter_1.id}/shelter_reviews/#{@reviews[0].id}/edit"
     end
+  end
+
+  it "has a link to delete each review" do
+    within "#review-#{@reviews[0].id}" do
+      click_link "Delete Review"
+    end
+    
+      expect(current_path).to eq "/shelters/#{@shelter_1.id}"
+      expect(page).not_to have_content(@reviews[0].title)
+      expect(page).not_to have_content(@reviews[0].content)
+      expect(page).not_to have_content(@reviews[0].picture)
   end
 end
