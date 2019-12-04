@@ -56,11 +56,14 @@ describe "As a visitor, when I visit /shelters/:id," do
     click_button "Submit Review"
 
     expect(current_path).to eq("/shelters/#{@shelter_1.id}")
+    new_review = @shelter_1.shelter_reviews.last
 
-    expect(page).to have_content(review_title)
-    expect(page).to have_content(review_rating)
-    expect(page).to have_content(review_content)
-    expect(page).to have_css("img[src = '#{review_picture}']")
+    within "#review-#{new_review.id}" do
+      expect(page).to have_content(review_title)
+      expect(page).to have_content(review_rating)
+      expect(page).to have_content(review_content)
+      expect(page).to have_css("img[src = '#{review_picture}']")
+    end
   end
 
   it "I can see all shelter reviews and their traits" do
