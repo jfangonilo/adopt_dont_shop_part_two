@@ -12,11 +12,14 @@ class ShelterReviewsController < ApplicationController
     redirect_to "/shelters/#{shelter.id}"
   end
 
+  def edit
+    @review = ShelterReview.find(params[:shelter_review_id])
+  end
+
   private
 
   def shelter_review_params
     params.permit(:title, :rating, :content, :picture)
   end
-
-
 end
+

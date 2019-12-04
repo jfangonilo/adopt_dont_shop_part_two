@@ -2,23 +2,17 @@ require 'rails_helper'
 
 describe "As a visitor, when I visit /shelters/:id/edit," do
   before :each do
-    @shelter_1 = Shelter.create!(
-      name:     "Shelter 1",
-      address:  "6303 W Exposition Ave",
-      city:     "Lakewood",
-      state:    "CO",
-      zip:      "80226"
-    )
+    @shelter_1 = create(:random_shelter)
 
     visit "/shelters/#{@shelter_1.id}/edit"
   end
 
   it "I can fill out a form to update that shelter and can see the updated information" do
-    fill_in 'name',    with: 'test shelter'
-    fill_in 'address', with: 'test shelter address'
-    fill_in 'city',    with: 'test shelter city'
-    fill_in 'state',   with: 'test shelter state'
-    fill_in 'zip',     with: 'test shelter zip'
+    fill_in "name",    with: "test shelter"
+    fill_in "address", with: "test shelter address"
+    fill_in "city",    with: "test shelter city"
+    fill_in "state",   with: "test shelter state"
+    fill_in "zip",     with: "test shelter zip"
 
     click_button "Update"
     
@@ -30,10 +24,10 @@ describe "As a visitor, when I visit /shelters/:id/edit," do
     expect(page).to have_content "test shelter state"
     expect(page).to have_content "test shelter zip"
 
-    expect(page).to_not have_content "Shelter 1"
-    expect(page).to_not have_content "6303 W Exposition Ave"
-    expect(page).to_not have_content "Lakewood"
-    expect(page).to_not have_content "CO"
-    expect(page).to_not have_content "80226"
+    expect(page).to_not have_content @shelter_1.name
+    expect(page).to_not have_content @shelter_1.address
+    expect(page).to_not have_content @shelter_1.city
+    expect(page).to_not have_content @shelter_1.state
+    expect(page).to_not have_content @shelter_1.zip
   end
 end
