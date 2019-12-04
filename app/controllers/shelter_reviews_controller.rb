@@ -24,7 +24,7 @@ class ShelterReviewsController < ApplicationController
       redirect_to "/shelters/#{params[:shelter_id]}"
     else
       flash[:notice] = "Please fill out all fields"
-      render :new
+      render :edit
     end
   end
 
