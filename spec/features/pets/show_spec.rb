@@ -33,7 +33,6 @@ describe "When I visit /pets/:id," do
   end
 
   it "I can click a link to change the pet's status to Adoption Pending/Adoptable" do
-
     click_link "Change to Adoption Pending"
     expect(current_path).to eq "/pets/#{@pet.id}"
     within "#adoptable-status" do
