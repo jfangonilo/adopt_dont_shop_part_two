@@ -9,8 +9,6 @@ describe "shelter review index" do
   end
 
   it "shows the review's traits" do
-    # save_and_open_page
-    # binding.pry
     @reviews.each do |review|
       within "#review-#{review.id}" do
         expect(page).to have_content review.title
@@ -20,6 +18,5 @@ describe "shelter review index" do
       end
     end
   end
-
 end
 
