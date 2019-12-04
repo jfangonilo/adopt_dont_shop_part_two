@@ -77,8 +77,8 @@ describe "As a visitor, when I visit /shelters/:id," do
     expect(page).to have_content("Please fill out all fields")
     expect(page).to have_button("Submit Review")
 
-    # click_link "Pets"
-    # expect(page).not_to have_content("Please fill out all fields")
+    click_link "Pets"
+    expect(page).not_to have_content("Please fill out all fields")
   end
 
   it "I can see all shelter reviews and their traits" do
