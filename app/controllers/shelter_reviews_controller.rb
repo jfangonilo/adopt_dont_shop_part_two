@@ -17,6 +17,8 @@ class ShelterReviewsController < ApplicationController
   end
 
   def destroy
+    shelter_id = params[:shelter_id]
+    redirect_to "/shelters/#{shelter_id}"
   end
 
   private
