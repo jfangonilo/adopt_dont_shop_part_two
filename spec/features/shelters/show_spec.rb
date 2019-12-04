@@ -48,4 +48,20 @@ describe "As a visitor, when I visit /shelters/:id," do
     click_link "#{@shelter_1.name}"
     expect(current_path).to eq "/shelters/#{@shelter_1.id}/pets"
   end
+
+  it "I can see all shelter reviews and their traits" do
+    @reviews  = create_list(:random_shelter_review, 3, shelter: @shelter_1)
+
+    visit "/shelters/#{@shelter_1.id}"
+
+    @reviews.each do |review|
+      within "#review-#{review.id}" do
+        expect(page).to have_content review.title
+        expect(page).to have_content review.rating
+        expect(page).to have_content review.content
+        expect(page).to have_css "img[src = '#{review.picture}']"
+      end
+    end
+  end
+
 end
