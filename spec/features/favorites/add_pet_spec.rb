@@ -9,9 +9,7 @@ RSpec.describe "When a user visits a pet's show page" do
 
   it "can add the pet to their favorites" do
     visit "/pets/#{@pet_1.id}"
-    within "#pet-#{@pet_1.id}" do
-      click_button "Add to Favorites"
-    end
+    click_button "Add to Favorites"
 
     expect(current_path).to eq("/pets/#{@pet_1.id}")
     expect(page).to have_content("#{@pet_1.name} has been added to your favorites!")
@@ -21,9 +19,7 @@ RSpec.describe "When a user visits a pet's show page" do
     end
 
     visit "/pets/#{@pet_2.id}"
-    within "#pet-#{@pet_2.id}" do
-      click_button "Add to Favorites"
-    end
+    click_button "Add to Favorites"
 
     expect(current_path).to eq("/pets/#{@pet_2.id}")
     expect(page).to have_content("#{@pet_2.name} has been added to your favorites!")
