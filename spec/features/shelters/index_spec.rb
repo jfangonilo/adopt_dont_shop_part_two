@@ -2,27 +2,15 @@ require 'rails_helper'
 
 describe "As a visitor, when I visit the shelters index page," do
   before :each do
-    @shelter_1 = Shelter.create!(
-      name:     "Winterfell",
-      address:  "6303 W Exposition Ave",
-      city:     "Lakewood",
-      state:    "CO",
-      zip:      "80226"
-    )
-    @shelter_2 = Shelter.create!(
-      name:     "Sunspear",
-      address:  "12322 Bohannon Blvd",
-      city:     "Orlando",
-      state:    "FL",
-      zip:      "32824"
-    )
+    @shelter_1 = create(:random_shelter, name: "Winterfell")
+    @shelter_2 = create(:random_shelter, name: "Sunspear")
 
     visit "/shelters"
   end
 
   it "I can see the name of each shelter in the system" do
-    expect(page).to have_content "Winterfell"
-    expect(page).to have_content "Sunspear"
+    expect(page).to have_content "#{@shelter_1.name}"
+    expect(page).to have_content "#{@shelter_2.name}"
   end
 
   it "I can navigate to the shelter creation page via a link" do
@@ -31,7 +19,7 @@ describe "As a visitor, when I visit the shelters index page," do
   end
 
   it "I can navigate to individual shelters via a link" do
-    click_link "Winterfell"
+    click_link "#{@shelter_1.name}"
     expect(current_path).to eq "/shelters/#{@shelter_1.id}"
   end
 
@@ -50,7 +38,10 @@ describe "As a visitor, when I visit the shelters index page," do
   end
 
   it "I can sort alphhabetically" do
+    expect(page.body.index("Winterfell")).to be < page.body.index("Sunspear")
+
     click_link "Sort Alphabetically"
+    
     expect(page.body.index("Sunspear")).to be < page.body.index("Winterfell")
   end
 end
