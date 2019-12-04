@@ -38,12 +38,10 @@ describe "As a visitor, when I visit /shelters/:id," do
   end
 
   it "has a link to edit a review" do
-    @reviews.each do |review|
-      within "#review-#{review.id}" do
-        click_link "Edit Review"
+    within "#review-#{@reviews[0].id}" do
+      click_link "Edit Review"
 
-        expect(current_path).to eq "/shelters/#{@shelter_1.id}/shelter_reviews"
-      end
+      expect(current_path).to eq "/shelters/#{@shelter_1.id}/shelter_reviews/#{@reviews[0].id}/edit"
     end
   end
 end
