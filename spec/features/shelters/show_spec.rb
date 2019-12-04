@@ -5,8 +5,8 @@ describe "As a visitor, when I visit /shelters/:id," do
     @shelter_1  = create(:random_shelter)
     @pet        = create(:random_pet, shelter: @shelter_1)
     @reviews    = create_list(:random_shelter_review, 3, shelter: @shelter_1)
-
-     visit "shelters/#{@shelter_1.id}"
+  
+    visit "shelters/#{@shelter_1.id}"
   end
 
   it "I can see the shelter with that id including the shelter's name, address, city, state, zip" do
@@ -42,7 +42,7 @@ describe "As a visitor, when I visit /shelters/:id," do
       within "#review-#{review.id}" do
         click_link "Edit Review"
 
-        expect(current_path).to eq "/shelters/:id/shelter_reviews"
+        expect(current_path).to eq "/shelters/#{@shelter_1.id}/shelter_reviews"
       end
     end
   end
