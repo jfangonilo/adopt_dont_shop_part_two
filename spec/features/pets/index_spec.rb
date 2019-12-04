@@ -6,7 +6,7 @@ describe "As a user, when I visit the pet index page," do
 
     @pet_1 = create(:random_pet, shelter: shelters[0])
     @pet_2 = create(:random_pet, shelter: shelters[1])
-
+    
     visit "/pets"
   end
 
@@ -39,7 +39,7 @@ describe "As a user, when I visit the pet index page," do
     within "#pet-#{@pet_1.id}" do
       click_link "Delete"
     end
-    expect(current_path).to_not have_content "Seamus"
+    expect(current_path).to_not have_content @pet_1.name
   end
 
   it "I can navigate to a shelter on the page" do
