@@ -66,6 +66,21 @@ describe "As a visitor, when I visit /shelters/:id," do
     end
   end
 
+  it "displays flash message if new review fields not filled in" do
+    click_link "Add a Review"
+
+    click_button "Submit Review"
+    expect(page).to have_content("Please fill out all fields")
+    expect(page).to have_button("Submit Review")
+
+    click_button "Submit Review"
+    expect(page).to have_content("Please fill out all fields")
+    expect(page).to have_button("Submit Review")
+
+    # click_link "Pets"
+    # expect(page).not_to have_content("Please fill out all fields")
+  end
+
   it "I can see all shelter reviews and their traits" do
     @reviews  = create_list(:random_shelter_review, 3, shelter: @shelter_1)
 
@@ -93,7 +108,7 @@ describe "As a visitor, when I visit /shelters/:id," do
     within "#review-#{@reviews[0].id}" do
       click_link "Delete Review"
     end
-    
+
     expect(current_path).to eq "/shelters/#{@shelter_1.id}"
     expect(page).not_to have_content(@reviews[0].title)
     expect(page).not_to have_content(@reviews[0].content)
