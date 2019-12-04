@@ -13,7 +13,12 @@ class ShelterReviewsController < ApplicationController
   end
 
   def edit
+    @review_id = params[:shelter_review_id]
     @shelter_id = params[:shelter_id]
+  end
+
+  def update
+    
   end
 
   def destroy
