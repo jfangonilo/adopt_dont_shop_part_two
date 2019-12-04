@@ -5,11 +5,16 @@ class ShelterReviewsController < ApplicationController
   end
 
   def create
+    @shelter_id = params[:shelter_id]
     shelter = Shelter.find(params[:shelter_id])
-    shelter_review = shelter.shelter_reviews.create(shelter_review_params)
-    shelter_review.save
+    shelter_review = shelter.shelter_reviews.new(shelter_review_params)
 
-    redirect_to "/shelters/#{shelter.id}"
+    if shelter_review.save
+      redirect_to "/shelters/#{shelter.id}"
+    else
+      flash.now[:notice] = "Please fill out all fields"
+      render :new
+    end
   end
 
   def edit
