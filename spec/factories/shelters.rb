@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :random_shelter, class: Shelter do
-    name    {Faker::Company.name}
+    name    {Faker::TvShows::GameOfThrones.city}
     address {Faker::Address.street_address}
     city    {Faker::Address.city}
     state   {Faker::Address.state}
