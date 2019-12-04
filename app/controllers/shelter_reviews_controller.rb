@@ -20,8 +20,12 @@ class ShelterReviewsController < ApplicationController
   def update
     review = ShelterReview.find(params[:shelter_review_id])
     review.update(shelter_review_params)
-    review.save
-    redirect_to "/shelters/#{params[:shelter_id]}"
+    if review.save
+      redirect_to "/shelters/#{params[:shelter_id]}"
+    else
+      flash[:notice] = "Please fill out all fields"
+      render :new
+    end
   end
 
   def destroy
