@@ -12,7 +12,7 @@ class ShelterReviewsController < ApplicationController
     if shelter_review.save
       redirect_to "/shelters/#{shelter.id}"
     else
-      flash[:notice] = "Please fill out all fields"
+      flash.now[:notice] = "Please fill out all fields"
       render :new
     end
   end
