@@ -34,5 +34,9 @@ describe "shelter edit page" do
 
     expect(page).to have_content "Please fill out all fields"
     expect(page).to have_button "Update"
+
+    click_button "Update"
+    expect(page).to have_content "Please fill out all fields"
+    expect(page).to have_button "Update"
   end
 end
