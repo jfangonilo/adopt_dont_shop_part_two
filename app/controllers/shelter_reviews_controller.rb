@@ -25,7 +25,7 @@ class ShelterReviewsController < ApplicationController
     else
       @review_id = params[:shelter_review_id]
       @shelter_id = params[:shelter_id]
-      flash[:notice] = "Please fill out all fields"
+      flash.now[:notice] = "Please fill out all fields"
       render :edit
     end
   end
