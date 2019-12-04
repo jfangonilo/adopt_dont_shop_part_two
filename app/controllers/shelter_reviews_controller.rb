@@ -16,10 +16,12 @@ class ShelterReviewsController < ApplicationController
     @review = ShelterReview.find(params[:shelter_review_id])
   end
 
+  def destroy
+  end
+
   private
 
   def shelter_review_params
     params.permit(:title, :rating, :content, :picture)
   end
 end
-
