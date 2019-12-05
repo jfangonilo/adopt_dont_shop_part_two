@@ -1,6 +1,7 @@
 class FavoritesController < ApplicationController
 
   def index
+    @favs = session[:favorites].keys
   end
 
   def update
