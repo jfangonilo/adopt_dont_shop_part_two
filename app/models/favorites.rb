@@ -5,6 +5,7 @@ class Favorites
   end
 
   def total_count
+    @contents.values.sum
   end
 
 end
