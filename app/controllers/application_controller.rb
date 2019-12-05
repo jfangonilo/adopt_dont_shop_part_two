@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
 
   def favorites
     session[:favorites] ||= Hash.new(0)
-    @favorites ||= Favorites.new(session[:favorites])
+    @favorites = Favorites.new(session[:favorites])
   end
 end
