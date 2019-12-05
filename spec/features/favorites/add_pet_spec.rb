@@ -16,7 +16,7 @@ RSpec.describe "When a user adds a pet to their favorites" do
     visit "/pets/#{pet_1.id}"
     click_button "Add #{pet_1.name} to Favorites"
 
-    with ".navbar" do
+    within ".navbar" do
       expect(page).to have_content("Favorites: 1")
     end
 
@@ -24,7 +24,7 @@ RSpec.describe "When a user adds a pet to their favorites" do
     visit "/pets/#{pet_2.id}"
     click_button "Add #{pet_2.name} to Favorites"
 
-    with ".navbar" do
+    within ".navbar" do
       expect(page).to have_content("Favorites: 2")
     end
   end
