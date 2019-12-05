@@ -1,7 +1,8 @@
 class FavoritesController < ApplicationController
 
   def update
-    pet_id = params[:pet_id]
-    redirect_to "/pets/#{pet_id}"
+    pet = Pet.find(params[:pet_id])
+    redirect_to "/pets/#{pet.id}"
+    flash[:notice] = "#{pet.name} has been added to your favorites!"
   end
 end
