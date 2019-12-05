@@ -1,6 +1,6 @@
 class SheltersController < ApplicationController
   def index
-    @shelters = Shelter.all
+    @shelters = Shelter.alpha_sort
   end
 
   def show
@@ -30,11 +30,6 @@ class SheltersController < ApplicationController
   def destroy
     Shelter.destroy(params[:id])
     redirect_to '/shelters'
-  end
-
-  def sort
-    @shelters = Shelter.alpha_sort
-    render 'index'
   end
 
 private
