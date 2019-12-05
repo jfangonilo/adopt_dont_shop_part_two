@@ -1,7 +1,6 @@
 <section class = "wrapper">
 
-  <% @favs.each do |favorite| %>
-    <% pet = Pet.find(favorite.to_i) %>
+  <% @pets.each do |pet| %>
     <section id = "favorite-<%= pet.id %>">
       <%= image_tag pet.image %>
       <%= pet.name %>
