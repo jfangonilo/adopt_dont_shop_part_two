@@ -4,4 +4,7 @@ class Favorites
     @contents = initial_contents
   end
 
+  def total_count
+  end
+
 end
