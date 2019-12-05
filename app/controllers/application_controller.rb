@@ -7,9 +7,3 @@ class ApplicationController < ActionController::Base
     @favorites ||= Favorites.new(session[:favorites])
   end
 end
-
-helper_method :favorites
-
-def favorites
-  @favorites ||= FavoriteList.new(session[:favorites])
-end
