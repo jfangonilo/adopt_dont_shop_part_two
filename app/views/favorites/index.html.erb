@@ -1,0 +1,10 @@
+<section class = "wrapper">
+
+  <% @pets.each do |pet| %>
+    <section id = "favorite-<%= pet.id %>">
+      <%= image_tag pet.image %>
+      <%= pet.name %>
+    </section>
+  <% end %>
+
+</section>
