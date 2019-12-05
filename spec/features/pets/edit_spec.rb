@@ -31,6 +31,5 @@ describe "As a visitor, when I go to /pet/:id/edit," do
     expect(page).not_to have_css "img[url = '#{@pet.image}']"
     expect(page).not_to have_content @pet.name
     expect(page).not_to have_content @pet.description
-    expect(page).not_to have_content @pet.approximate_age
   end
 end
