@@ -1,7 +1,7 @@
 <section class = "wrapper">
   <h1><%= @pet.name %></h1>
   <%= image_tag @pet.image %>
-  <%= button_to "Add to Favorites", "/favorites/#{@pet.id}", method: :patch %>
+  <%= button_to "Add #{@pet.name} to Favorites", "/favorites/#{@pet.id}", method: :patch %>
   <p><%= @pet.description %><p>
   <p><%= @pet.approximate_age %> y/o <%= @pet.sex %></p>
   <% if @pet.adoptable? %>

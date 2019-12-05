@@ -1,28 +1,28 @@
 require 'rails_helper'
 
-RSpec.describe "When a user visits a pet's show page" do
-  before :each do
-    @shelter = create(:random_shelter)
-    @pet_1 = create(:random_pet, shelter: @shelter)
-    @pet_2 = create(:random_pet, shelter: @shelter)
+RSpec.describe "When a user adds a pet to their favorites" do
+  it "displays message that pet was added to favorites" do
+    pet = create(:random_pet)
+
+    visit "/pets/#{pet.id}"
+
+    click_button "Add #{pet.name} to Favorites"
+
+    expect(page).to have_content("#{pet.name} has been added to your favorites!")
   end
 
-  it "can add the pet to their favorites" do
-    visit "/pets/#{@pet_1.id}"
-    click_button "Add to Favorites"
-
-    expect(current_path).to eq("/pets/#{@pet_1.id}")
-    expect(page).to have_content("#{@pet_1.name} has been added to your favorites!")
+  it "displays count of all favorites" do
+    pet_1 = create(:random_pet)
+    visit "/pets/#{pet_1.id}"
+    click_button "Add #{pet_1.name} to Favorites"
 
     within ".topnav" do
-      expect(page).to have_content("Favorite: 1")
+      expect(page).to have_content("Favorites: 1")
     end
 
-    visit "/pets/#{@pet_2.id}"
-    click_button "Add to Favorites"
-
-    expect(current_path).to eq("/pets/#{@pet_2.id}")
-    expect(page).to have_content("#{@pet_2.name} has been added to your favorites!")
+    pet_2 = create(:random_pet)
+    visit "/pets/#{pet_2.id}"
+    click_button "Add #{pet_2.name} to Favorites"
 
     within ".topnav" do
       expect(page).to have_content("Favorites: 2")

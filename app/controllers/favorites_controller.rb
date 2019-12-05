@@ -2,14 +2,11 @@ class FavoritesController < ApplicationController
 
   def update
     pet = Pet.find(params[:pet_id])
-    favorites = FavoriteList.new(sesion[:favorites])
+    favorites = Favorites.new(session[:favorites])
     favorites.add_pet(pet.id)
-    session[:favorites] = favorites.contents
-    # cookies[:favorites] = ||= Hash.new(0)
-    # cookies[:favorites][pet_id_str] ||= 0
-    # cookies[:favorites][pet_id_str] += 1
-
-    flash[:favorited] = "#{pet.name} has been added to your favorites!"
+    # session[:favorites] ||= Hash.new(0)
+    # session[:favorites][pet_id_str] ||= 1
     redirect_to "/pets/#{pet.id}"
+    flash[:notice] = "#{pet.name} has been added to your favorites!"
   end
 end
