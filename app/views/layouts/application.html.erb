@@ -11,6 +11,7 @@
   <body>
     <nav class = "topnav">
       <%= link_to "Pets", "/pets" %><%= link_to "Shelters", "/shelters" %>
+      <%= @favorites.total_count %>
     </nav>
     <% flash.each do |type, message| %>
       <p><%= message %></p>
