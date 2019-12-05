@@ -32,11 +32,6 @@ class SheltersController < ApplicationController
     redirect_to '/shelters'
   end
 
-  def sort
-    @shelters = Shelter.alpha_sort
-    render 'index'
-  end
-
 private
   def shelter_params
     params.permit(:name, :address, :city, :state, :zip)
