@@ -15,7 +15,7 @@ RSpec.describe "When a user visits a pet's show page" do
     expect(page).to have_content("#{@pet_1.name} has been added to your favorites!")
 
     within ".topnav" do
-      expect(page).to have_content("1 Favorite")
+      expect(page).to have_content("Favorite: 1")
     end
 
     visit "/pets/#{@pet_2.id}"
@@ -25,7 +25,7 @@ RSpec.describe "When a user visits a pet's show page" do
     expect(page).to have_content("#{@pet_2.name} has been added to your favorites!")
 
     within ".topnav" do
-      expect(page).to have_content("2 Favorites")
+      expect(page).to have_content("Favorites: 2")
     end
   end
 end
