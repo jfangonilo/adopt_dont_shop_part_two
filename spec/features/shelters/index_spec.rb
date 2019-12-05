@@ -37,9 +37,7 @@ describe "As a visitor, when I visit the shelters index page," do
     expect(page).to_not have_content "Winterfell"
   end
 
-  it "I can sort alphhabetically" do
-    expect(page.body.index("Winterfell")).to be < page.body.index("Sunspear")
-    click_link "Sort Alphabetically"
+  it "I can sort alphabetically" do
     expect(page.body.index("Sunspear")).to be < page.body.index("Winterfell")
   end
 end
