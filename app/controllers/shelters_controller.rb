@@ -1,6 +1,6 @@
 class SheltersController < ApplicationController
   def index
-    @shelters = Shelter.all
+    @shelters = Shelter.alpha_sort
   end
 
   def show
