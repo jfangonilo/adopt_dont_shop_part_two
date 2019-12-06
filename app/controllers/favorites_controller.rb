@@ -9,6 +9,11 @@ class FavoritesController < ApplicationController
     end
   end
 
+  def show
+    @pet = Pet.find(params[:pet_id])
+    render 'pets/show'
+  end
+
   def update
     pet = Pet.find(params[:pet_id])
     favorites.add_pet(pet.id)
