@@ -17,7 +17,7 @@ describe "All pages" do
 
   it "should have link to favorites" do
     within ".topnav" do
-      click_link "Favorites"
+      click_link "Favorites: 0"
     end
     expect(current_path).to eq "/favorites"
   end
