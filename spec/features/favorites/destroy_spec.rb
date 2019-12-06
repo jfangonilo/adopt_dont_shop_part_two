@@ -71,7 +71,7 @@ RSpec.describe "a user can remove individual pets from favorites" do
 
     visit '/favorites'
 
-    within "favorite-#{pet_1.id}" do
+    within "#favorite-#{pet_1.id}" do
       click_button "Remove #{pet_1.name} from Favorites"
     end
 
