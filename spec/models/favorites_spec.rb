@@ -28,6 +28,7 @@ RSpec.describe Favorites do
   describe "#delete_pet" do
     it "deletes pet from favorites" do
       list = Favorites.new
+      list.add_pet(1)
       list.delete_pet(1)
 
       expect(list.contents).to eq({})
