@@ -48,7 +48,18 @@ RSpec.describe "a user can remove individual pets from favorites" do
     expect(page).to have_content("#{pet_1.name} has been removed from your favorites.")
   end
 
-  xit "remove from favorites decreases nav favorites counter by one" do
+  it "remove from favorites decreases nav favorites counter by one" do
+    pet_1 = create(:random_pet)
 
+    visit "/pets/#{pet_1.id}"
+    click_button "Add #{pet_1.name} to Favorites"
+    within ".topnav" do
+      expect(page).to have_content("Favorites: 1")
+    end
+
+    click_button "Remove #{pet_1.name} from Favorites"
+    within ".topnav" do
+      expect(page).to have_content("Favorites: 0")
+    end
   end
 end
