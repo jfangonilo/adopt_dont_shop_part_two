@@ -1,7 +1,11 @@
 <section class = "wrapper">
   <h1><%= @pet.name %></h1>
   <%= image_tag @pet.image %>
-  <%= button_to "Add #{@pet.name} to Favorites", "/favorites/#{@pet.id}", method: :patch %>
+    <% if favorites.contents.keys.include? @pet.id.to_s %>
+      <%= button_to "Remove #{@pet.name} from Favorites", "/favorites/#{@pet.id}", method: :delete %>
+    <% else %>
+      <%= button_to "Add #{@pet.name} to Favorites", "/favorites/#{@pet.id}", method: :patch %>
+    <% end %>
   <p><%= @pet.description %><p>
   <p><%= @pet.approximate_age %> y/o <%= @pet.sex %></p>
   <% if @pet.adoptable? %>
