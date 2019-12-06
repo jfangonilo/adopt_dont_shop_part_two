@@ -30,5 +30,5 @@ Rails.application.routes.draw do
   get '/favorites', to: 'favorites#index'
   get '/favorites/:pet_id', to: 'favorites#show'
   patch '/favorites/:pet_id', to: 'favorites#update'
-  delete '/favoerites/:pet_id', to: 'favorites#destroy'
+  delete '/favorites/:pet_id', to: 'favorites#destroy'
 end
