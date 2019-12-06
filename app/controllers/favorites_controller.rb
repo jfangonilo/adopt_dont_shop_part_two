@@ -22,7 +22,7 @@ class FavoritesController < ApplicationController
   end
 
   def reset
-    reset_session
+    session.delete(:favorites)
     redirect_to "/favorites"
   end
 end
