@@ -1,11 +1,17 @@
 class FavoritesController < ApplicationController
 
   def index
+    session[:favorites] ||= Hash.new(0)
     favorite_ids = session[:favorites].keys
-    favorite_ids.map(&:to_i)
-    @pets = favorite_ids.map do |pet_id|
-      Pet.find(pet_id)
+    @pets = favorite_ids.map(&:to_i).map{|id| Pet.find(id)}
+    if @pets.empty?
+      flash.now[:notice] = "How could you be so heartless??? You don't have any favorites yet!"
     end
+  end
+
+  def show
+    @pet = Pet.find(params[:pet_id])
+    render 'pets/show'
   end
 
   def update

@@ -14,4 +14,11 @@ describe "All pages" do
     click_link "Shelters"
     expect(current_path).to eq "/shelters"
   end
+
+  it "should have link to favorites" do
+    within ".topnav" do
+      click_link "Favorites: 0"
+    end
+    expect(current_path).to eq "/favorites"
+  end
 end
