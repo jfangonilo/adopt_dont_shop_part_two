@@ -14,7 +14,7 @@ class Favorites
     @contents.values.sum
   end
 
-  def delete_pet
+  def delete_pet(id)
   end
 
 end
