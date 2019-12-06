@@ -2,10 +2,7 @@ class FavoritesController < ApplicationController
 
   def index
     favorite_ids = session[:favorites].keys
-    favorite_ids.map(&:to_i)
-    @pets = favorite_ids.map do |pet_id|
-      Pet.find(pet_id)
-    end
+    @pets = favorite_ids.map(&:to_i).map{|id| Pet.find(id)}
   end
 
   def update
