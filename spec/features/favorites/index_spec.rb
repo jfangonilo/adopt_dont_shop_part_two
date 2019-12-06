@@ -18,4 +18,16 @@ RSpec.describe "favorites index page" do
     expect(page).to have_content(pet_2.name)
     expect(page).to have_css("img[src = '#{pet_2.image}']")
   end
+
+  it "shows a message if you have no pets in your favorites" do
+    visit "/favorites"
+    expect(page).to have_content "How could you be so heartless??? You don't have any favorites yet!"
+    
+    pet = create(:random_pet)
+    visit "/pets/#{pet.id}"
+    click_button "Add #{pet.name} to Favorites"
+    
+    visit "/favorites"
+    expect(page).not_to have_content "How could you be so heartless??? You don't have any favorites yet!"
+  end
 end
