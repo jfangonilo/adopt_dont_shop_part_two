@@ -37,8 +37,15 @@ RSpec.describe "a user can remove individual pets from favorites" do
     expect(page).to have_button("Add #{pet_1.name} to Favorites")
   end
 
-  xit "remove from favorites button redirects to pet show page and displays flash message" do
+  it "remove from favorites button redirects to pet show page and displays flash message" do
+    pet_1 = create(:random_pet)
 
+    visit "/pets/#{pet_1.id}"
+    click_button "Add #{pet_1.name} to Favorites"
+    click_button "Remove #{pet_1.name} from Favorites"
+
+    expect(current_path).to eq("/pets/#{pet_1.id}")
+    expect(page).to have_content("#{pet_1.name} has been removed from your favorites.")
   end
 
   xit "remove from favorites decreases nav favorites counter by one" do
