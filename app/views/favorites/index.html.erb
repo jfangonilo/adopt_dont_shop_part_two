@@ -1,4 +1,5 @@
 <section class = "wrapper">
+  <%= button_to "Start Adoption Application" %>
   <% @pets.each do |pet| %>
     <section id = "favorite-<%= pet.id %>">
       <%= image_tag pet.image %>
