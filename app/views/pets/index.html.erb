@@ -1,10 +1,5 @@
 <section class ="wrapper">
-  <% if @shelter %>
-  <h1><%= @shelter.pet_count %> Pets at <%= @shelter.name %></h1>
-    <p><%= link_to "Add Pet", "/shelters/#{@shelter.id}/pets/new" %></p>
-  <% else %>
-    <h1>All Pets</h1>
-  <% end %>
+  <h1>All Pets</h1>
   
   <% @pets.each do |pet| %>
     <section id="pet-<%= pet.id %>">
