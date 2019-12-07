@@ -21,8 +21,8 @@ class FavoritesController < ApplicationController
     flash[:notice] = "#{pet.name} has been added to your favorites!"
   end
 
-# redirect_back to just use one method and stay RESTful
-# chose '/favorites' as fallback_location for user experience
+  # redirect_back to just use one method and stay RESTful
+  # chose '/favorites' as fallback_location for user experience
   def destroy
     pet = Pet.find(params[:pet_id])
     favorites.delete_pet(pet.id)
