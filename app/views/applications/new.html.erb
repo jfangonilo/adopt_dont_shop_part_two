@@ -1,7 +1,7 @@
 <%= form_tag "/applications" do %>
 <% require "pry"; binding.pry %>
-  <% favorites.each do |id_str, value| %>
-    <%= check_box_tag  %>
+  <% @favorite_pets.each do |pet| %>
+    <%= check_box_tag   %>
     <%= label_tag  %>
   <% end %>
 
