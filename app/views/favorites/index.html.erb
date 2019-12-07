@@ -3,6 +3,7 @@
     <section id = "favorite-<%= pet.id %>">
       <%= image_tag pet.image %>
       <%= pet.name %>
+      <%= button_to "Remove #{pet.name} from Favorites", "/favorites/#{pet.id}", method: :delete %>
     </section>
   <% end %>
   <%= link_to "Remove All Favorites", "/favorites", method: :delete %>

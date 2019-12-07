@@ -7,15 +7,15 @@ class Favorites
   end
 
   def add_pet(id)
-    @contents[id.to_s] = 1
+    contents[id.to_s] = 1
   end
 
   def total_count
-    @contents.values.sum
+    contents.values.sum
   end
 
   def delete_pet(id)
-    @contents.delete(id.to_s)
+    contents.delete(id.to_s)
   end
 
 end

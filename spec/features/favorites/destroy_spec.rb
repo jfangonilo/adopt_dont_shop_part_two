@@ -62,4 +62,25 @@ RSpec.describe "a user can remove individual pets from favorites" do
       expect(page).to have_content("Favorites: 0")
     end
   end
+
+  it "can remove pet from favorites on favorites page" do
+    pet_1 = create(:random_pet)
+
+    visit "/pets/#{pet_1.id}"
+    click_button "Add #{pet_1.name} to Favorites"
+
+    visit '/favorites'
+
+    within "#favorite-#{pet_1.id}" do
+      click_button "Remove #{pet_1.name} from Favorites"
+    end
+
+    expect(current_path).to eq('/favorites')
+    expect(page).not_to have_content(pet_1.name)
+    expect(page).not_to have_css("img[src = '#{pet_1.image}']")
+    within ".topnav" do
+      expect(page).to have_content("Favorites: 0")
+    end
+
+  end
 end
