@@ -17,13 +17,13 @@ describe "new application" do
     click_button "Start Adoption Application"
 
     within "#pet-#{pet_1.name}" do
-      check "#{pet_1.name}"
+      check "pets_applied_for_"
     end
     within "#pet-#{pet_2.name}" do
-      check "#{pet_2.name}"
+      check "pets_applied_for_"
     end
     within "#pet-#{pet_3.name}" do
-      uncheck "#{pet_3.name}"
+      uncheck "pets_applied_for_"
     end
 
     name          = "Jomah"
@@ -42,7 +42,7 @@ describe "new application" do
     fill_in "phone_number", with: phone_number
     fill_in "description",  with: description
     click_button "Submit Application"
-    
+
     expect(current_path).to eq "/favorites"
     expect(page).to have_content "Application sent for #{pet_1.name}!"
     expect(page).to have_content "Application sent for #{pet_2.name}!"
