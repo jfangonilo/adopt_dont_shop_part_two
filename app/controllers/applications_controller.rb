@@ -6,6 +6,7 @@ class ApplicationsController < ApplicationController
     end
 
     def create
+      redirect_to '/favorites'
     end
   end
 end
