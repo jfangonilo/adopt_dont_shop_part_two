@@ -9,9 +9,10 @@ class ApplicationsController < ApplicationController
     def create
       pets = Pet.find(params[:pets_applied_for])
       redirect_to '/favorites'
-      pets.reduce([]) do |acc, pet|
-        acc <<  "Application sent for #{pet.name}!"
-        flash[:submit] = acc
+      messages = []
+      pets.each do |pet|
+        messages <<  "Application sent for #{pet.name}!"
+        flash[:submit] = messages.join
       end
     end
 end
