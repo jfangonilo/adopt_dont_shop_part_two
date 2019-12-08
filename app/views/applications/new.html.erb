@@ -2,7 +2,7 @@
 <% pets_applied_for ||= [] %>
   <% @favorite_pets.each do |pet| %>
     <section id="pet-<%= pet.name %>">
-      <%= check_box_tag "pets_applied_for[]" %>
+      <%= check_box_tag "pets_applied_for[]", pet.id %>
       <%= label_tag pets_applied_for, "#{pet.name}" %>
     </section>
   <% end %><br>
