@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
   def index
-    favorites = FavoriteList.new(session[:favorites])
+    favorites = Favorites.new(session[:favorites])
   end
 end
