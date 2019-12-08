@@ -3,7 +3,11 @@
   <% @favorite_pets.each do |pet| %>
     <section id="pet-<%= pet.name %>">
       <%= check_box_tag "pets_applied_for[]", pet.id %>
+<<<<<<< HEAD
       <%= label_tag pets_applied_for, "#{pet.name}" %>
+=======
+      <%= label_tag "#{pet.name}" %>
+>>>>>>> 69b509fd125796a48e2d78bad87306f3fb27a0a6
     </section>
   <% end %><br>
 
