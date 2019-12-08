@@ -47,6 +47,7 @@ describe "new application" do
     expect(page).to have_content "Application sent for #{pet_1.name}!"
     expect(page).to have_content "Application sent for #{pet_2.name}!"
 
+    visit '/favorites'
     expect(page).to_not have_content pet_1.name
     expect(page).to_not have_content pet_2.name
     expect(page).to have_content pet_3.name
