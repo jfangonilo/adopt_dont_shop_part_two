@@ -43,6 +43,10 @@ describe "new application" do
     fill_in "description",  with: description
     click_button "Submit Application"
 
+    app = Application.last
+
+    expect(app.pets).to eq([pet_1, pet_2])
+
     expect(current_path).to eq "/favorites"
     expect(page).to have_content "Application sent for #{pet_1.name}!"
     expect(page).to have_content "Application sent for #{pet_2.name}!"
