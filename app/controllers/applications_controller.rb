@@ -6,6 +6,13 @@ class ApplicationsController < ApplicationController
     end
 
     def create
+      pets = Pet.find(params[:pets_applied_for])
+      redirect_to '/favorites'
+      messages = []
+      pets.each do |pet|
+        messages << "Application sent for #{pet.name}!"
+      end 
+      flash[:notice] = messages.join
     end
   end
 end
