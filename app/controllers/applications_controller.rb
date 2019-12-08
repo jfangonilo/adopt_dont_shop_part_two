@@ -4,5 +4,8 @@ class ApplicationsController < ApplicationController
     @favorite_pets = favorites.contents.reduce([]) do |acc, (id, value)|
       acc << Pet.find(id)
     end
+
+    def create
+    end
   end
 end
