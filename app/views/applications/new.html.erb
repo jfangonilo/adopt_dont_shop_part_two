@@ -1,8 +1,9 @@
 <%= form_tag "/applications" do %>
+<% pets_applied_for ||= [] %>
   <% @favorite_pets.each do |pet| %>
     <section id="pet-<%= pet.name %>">
-      <%= check_box_tag :pets %>
-      <%= label_tag :pets, "#{pet.name}" %>
+      <%= check_box_tag "pets_applied_for[]" %>
+      <%= label_tag pets_applied_for, "#{pet.name}" %>
     </section>
   <% end %><br>
 
