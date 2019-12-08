@@ -16,25 +16,31 @@ describe "new application" do
     visit "/favorites"
     click_button "Start Adoption Application"
 
-    check "#{pet_1.name}"
-    check "#{pet_2.name}"
-    uncheck "#{pet_3.name}"
+    within "#pet-#{pet_1.name}" do
+      check "#{pet_1.name}"
+    end
+    within "#pet-#{pet_2.name}" do
+      check "#{pet_2.name}"
+    end
+    within "#pet-#{pet_3.name}" do
+      uncheck "#{pet_3.name}"
+    end
 
-    name = "Jomah"
-    address = "6303 W Exposition Ave"
-    city = "Lakewood"
-    state = "CO"
-    zip = "80226"
-    phone_number = "4079274443"
-    description = "I love all animals and will give the goodest boys all the belly rubs"
+    name          = "Jomah"
+    address       = "6303 W Exposition Ave"
+    city          = "Lakewood"
+    state         = "CO"
+    zip           = "80226"
+    phone_number  = "4079274443"
+    description   = "I love all animals and will give the goodest boys all the belly rubs"
 
-    fill_in "name", with: name
-    fill_in "address", with: address
-    fill_in "city", with: city
-    fill_in "state", with: state
-    fill_in "zip", with: zip
+    fill_in "name",         with: name
+    fill_in "address",      with: address
+    fill_in "city",         with: city
+    fill_in "state",        with: state
+    fill_in "zip",          with: zip
     fill_in "phone_number", with: phone_number
-    fill_in "description", with: description
+    fill_in "description",  with: description
     click_button "Submit Application"
     
     expect(current_path).to eq "/favorites"
