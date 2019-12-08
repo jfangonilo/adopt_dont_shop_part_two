@@ -18,8 +18,7 @@ class ShelterReviewsController < ApplicationController
   end
 
   def edit
-    @review_id = params[:shelter_review_id]
-    @shelter_id = params[:shelter_id]
+    @shelter_review = ShelterReview.find(params[:shelter_review_id])
   end
 
   def update
@@ -28,8 +27,7 @@ class ShelterReviewsController < ApplicationController
     if review.save
       redirect_to "/shelters/#{review.shelter_id}"
     else
-      @review_id = params[:shelter_review_id]
-      @shelter_id = params[:shelter_id]
+      @shelter_review = ShelterReview.find(params[:shelter_review_id])
       flash.now[:notice] = "Please fill out all fields"
       render :edit
     end
