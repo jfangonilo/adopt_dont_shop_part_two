@@ -11,14 +11,9 @@ class ApplicationsController < ApplicationController
       redirect_to '/favorites'
       messages = []
       pets.each do |pet|
-<<<<<<< HEAD
         messages <<  "Application sent for #{pet.name}!"
         flash[:submit] = messages.join
       end
-=======
-        messages << "Application sent for #{pet.name}!"
-      end 
-      flash[:notice] = messages.join
->>>>>>> 69b509fd125796a48e2d78bad87306f3fb27a0a6
+
     end
 end
