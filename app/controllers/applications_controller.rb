@@ -16,7 +16,7 @@ class ApplicationsController < ApplicationController
         end
       pet_ids = params[:pets_applied_for]
       pet_ids.each do |pet_id|
-        favorites.contents.delete(pet_id)
+        favorites.delete_pet(pet_id)
       end
     end
 end
