@@ -7,7 +7,9 @@ class ApplicationsController < ApplicationController
   end
 
     def create
+      app = Application.create(application_params)
       pets = Pet.find(params[:pets_applied_for])
+      app.pets << pets
       redirect_to '/favorites'
       messages = []
         pets.each do |pet|
@@ -18,5 +20,11 @@ class ApplicationsController < ApplicationController
       pet_ids.each do |pet_id|
         favorites.delete_pet(pet_id)
       end
+    end
+
+  private
+
+    def application_params
+      params.permit(:name, :address, :city, :state, :zip, :phone_number, :description)
     end
 end
