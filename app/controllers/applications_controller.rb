@@ -12,7 +12,7 @@ class ApplicationsController < ApplicationController
       messages = []
       pets.each do |pet|
         messages <<  "Application sent for #{pet.name}!"
-        flash[:submit] = messages.join
+        flash[:submit] = messages.join(' ')
       end
 
     end
