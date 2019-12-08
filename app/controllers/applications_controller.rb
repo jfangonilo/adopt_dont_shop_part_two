@@ -9,10 +9,9 @@ class ApplicationsController < ApplicationController
     def create
       pets = Pet.find(params[:pets_applied_for])
       redirect_to '/favorites'
-      flash[:submit] ||= []
-      pets.each do |pet|
-        flash[:submit] <<  "Application sent for #{pet.name}!"
+      pets.reduce([]) do |acc, pet|
+        acc <<  "Application sent for #{pet.name}!"
+        flash[:submit] = acc
       end
-      flash[:submit]
     end
 end
