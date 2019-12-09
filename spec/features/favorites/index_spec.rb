@@ -78,6 +78,7 @@ RSpec.describe "favorites index page" do
 
     visit '/favorites'
     within "#favorites-list" do
+      expect(page).to have_content("All Pets with Applications")
       click_link("#{pet_1.name}")
       expect(current_path).to eq("/pets/#{pet_1.id}")
     end
