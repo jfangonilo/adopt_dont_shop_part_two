@@ -29,7 +29,7 @@ class ApplicationsController < ApplicationController
     @applications = pet.applications
 
     if @applications.empty?
-      flash[:notice] = "Show this one some love! No one has applied yet!"
+      flash.now[:notice] = "Show this one some love! No one has applied yet!"
     end
   end
   
