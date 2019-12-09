@@ -6,5 +6,7 @@
 <%= @application.phone_number %><br>
 <%= @application.description %><br>
 <% @application.pets.each do |pet| %>
-  <%= link_to pet.name, "/pets/#{pet.id}" %>
+  <section id="pet-<%= pet.id %>">
+    <%= link_to pet.name, "/pets/#{pet.id}" %><br>
+  </section>
 <% end %><br>
