@@ -1,5 +1,6 @@
 <section class = "wrapper">
   <h1><%= @pet.name %></h1>
+  <%= link_to "See Applications", "/pets/#{@pet.id}/applications" %>
   <%= image_tag @pet.image %>
     <% if favorites.contents.keys.include? @pet.id.to_s %>
       <%= button_to "Remove #{@pet.name} from Favorites", "/favorites/#{@pet.id}", method: :delete %>
