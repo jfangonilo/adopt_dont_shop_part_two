@@ -46,15 +46,6 @@ RSpec.describe "favorites index page" do
     expect(page).to have_content "Favorites: 0"
   end
 
-
-#   User Story 18, List of Pets that have applications on them
-#
-# As a visitor
-# After one or more applications have been created
-# When I visit the favorites index page
-# I see a section on the page that has a list of all of the pets that have at least one application on them
-# Each pet's name is a link to their show page
-
   it "shows all pets with applications" do
     pet_1 = create(:random_pet)
     pet_2 = create(:random_pet)
@@ -79,6 +70,7 @@ RSpec.describe "favorites index page" do
     visit '/favorites'
     within "#favorites-list" do
       expect(page).to have_content("All Pets with Applications")
+      
       click_link("#{pet_1.name}")
       expect(current_path).to eq("/pets/#{pet_1.id}")
     end
