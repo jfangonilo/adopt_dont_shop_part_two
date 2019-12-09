@@ -38,8 +38,10 @@ class ApplicationsController < ApplicationController
   end
 
   def update
-    pet_id = params[:pet_id]
-    redirect_to "/pets/#{pet_id}"
+    @application_id = params[:application_id]
+    pet = Pet.find(params[:pet_id])
+    pet.toggle_adoptable
+    render "/pets/#{pet.id}"
   end
 
 private
