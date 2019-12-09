@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "applications show page" do
-  it "shows the application and the names of pets applied for" do
+  it "shows the application and the names of pets (links) applied for" do
     pet_1 = create(:random_pet)
     pet_2 = create(:random_pet)
     pet_3 = create(:random_pet)
@@ -20,5 +20,8 @@ describe "applications show page" do
     expect(page).to have_content pet_1.name
     expect(page).to have_content pet_2.name
     expect(page).to have_content pet_3.name
+
+    click_link pet_1.name
+    expect(current_path).to eq "/pets/#{pet_1.id}"
   end
 end
