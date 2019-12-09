@@ -38,6 +38,8 @@ class ApplicationsController < ApplicationController
   end
 
   def update
+    pet_id = params[:pet_id]
+    redirect_to "/pets/#{pet_id}"
   end
 
 private
