@@ -4,8 +4,12 @@ describe "applications show page" do
   it "allows you to approve a pet's application" do
     pet_1 = create(:random_pet)
     pet_2 = create(:random_pet)
+    
     application = create(:application)
     application.pets << [pet_1, pet_2]
+
+    application_2 = create(:application)
+    application_2.pets << [pet_1, pet_2]
 
     visit "/applications/#{application.id}"
     within "#pet-#{pet_1.id}" do
