@@ -1,6 +1,18 @@
 require "rails_helper"
 
 describe "application index page" do
+  it "shows a message saying there are no applications for a pet if empty" do
+    pet = create(:random_pet)
+
+    visit "/pets/#{pet.id}/applications"
+    expect(page).to have_content "Show this one some love! No one has applied yet!"
+    
+    application = create(:application)
+    application.pets << pet
+    visit "/pets/#{pet.id}/applications"
+    expect(page).not_to have_content "Show this one some love! No one has applied yet!"
+  end
+  
   it "shows each application" do
     pet = create(:random_pet)
     application_1 = create(:application)

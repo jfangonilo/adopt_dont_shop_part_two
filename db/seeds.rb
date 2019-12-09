@@ -23,3 +23,5 @@ application_2 = FactoryBot.create(:application)
 application_2.pets << pets_1[2]
 application_2.pets << pets_2[2]
 application_2.pets << pets_3[2]
+# single sad pet w/ no application
+FactoryBot.create(:random_pet) 
