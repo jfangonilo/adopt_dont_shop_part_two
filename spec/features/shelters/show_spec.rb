@@ -117,7 +117,7 @@ describe "As a visitor, when I visit /shelters/:id," do
 
   it "cannot delete shelter if applications pending on any pets" do
     shelter_1 = create(:random_shelter)
-    pet = create(:random_pet, shelter: :shelter_1)
+    pet = create(:random_pet, shelter: shelter_1)
     pet.adoptable = false
 
     visit "/shelters/#{shelter_1.id}"
