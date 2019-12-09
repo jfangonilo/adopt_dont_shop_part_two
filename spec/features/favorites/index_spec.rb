@@ -67,19 +67,19 @@ RSpec.describe "favorites index page" do
     application_3.pets << pet_2
 
     visit '/favorites'
-    within "favorites-list" do
+    within "#favorites-list" do
       click_link("#{pet_1.name}")
       expect(current_path).to eq("/pets/#{pet_1.id}")
     end
 
     visit '/favorites'
-    within "favorites_list" do
+    within "#favorites_list" do
       click_link("#{pet_2.name}")
       expect(current_path).to eq("/pets/#{pet_2.id}")
     end
 
     visit '/favorites'
-    within "favorites_list" do
+    within "#favorites_list" do
     expect(page).not_to have_link("#{pet_3.name}")
     end
   end
