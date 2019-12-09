@@ -14,7 +14,7 @@
   <section id = "favorites-list">
     <% @pets.each do |pet| %>
       <% if pet.applications.length > 0 %>
-        <%= pet.name %>
+        <%= link_to pet.name, "/pets/#{pet.id}" %>
       <% end %>
     <% end %>
   </section>
