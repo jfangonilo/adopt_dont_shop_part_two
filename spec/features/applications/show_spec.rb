@@ -13,8 +13,8 @@ describe "applications show page" do
     end
 
     expect(current_path).to eq "/pets/#{pet_1.id}"
-    within "#adopatable-status" do
-      expect(page).to have_content "Adoption Pending: #{@application.name}"
+    within "#adoptable-status" do
+      expect(page).to have_content "Adoption Pending: #{application.name}"
     end
   end  
 
