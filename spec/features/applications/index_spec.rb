@@ -6,6 +6,11 @@ describe "application index page" do
 
     visit "/pets/#{pet.id}/applications"
     expect(page).to have_content "Show this one some love! No one has applied yet!"
+    
+    application = create(:application)
+    application.pets << pet
+    visit "/pets/#{pet.id}/applications"
+    expect(page).not_to have_content "Show this one some love! No one has applied yet!"
   end
   
   it "shows each application" do
