@@ -37,6 +37,9 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
   end
 
+  def update
+  end
+
 private
   def application_params
     params.permit(:name, :address, :city, :state, :zip, :phone_number, :description)
