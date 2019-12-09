@@ -24,7 +24,7 @@ describe "application index page" do
       expect(page).to have_link application_3.name
     end
 
-    # click_link application_1.name
-    # expect(current_path).to eq "applications/#{application_1.id}"
+    click_link application_1.name
+    expect(current_path).to eq "/applications/#{application_1.id}"
   end
 end
