@@ -12,7 +12,7 @@ describe "application index page" do
     
     visit "pets/#{pet.id}"
     click_link "See Applications"
-    expect(current_path).to eq "pets/#{pet.id}/applications"
+    expect(current_path).to eq "/pets/#{pet.id}/applications"
 
     within "#application-#{application_1.id}" do
       expect(page).to have_content application_1.name
