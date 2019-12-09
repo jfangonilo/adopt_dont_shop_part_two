@@ -16,20 +16,21 @@ class ApplicationsController < ApplicationController
       favorites.delete_pets(pet_ids)
       app.pets << pets
       redirect_to '/favorites'
-      messages = []
-      pets.each do |pet|
-        messages <<  "Application sent for #{pet.name}!"
-        flash[:submit] = messages.join(' ')
-      end
+      messages = pets.map { |pet| "Application sent for #{pet.name}!" }
+      flash[:notice] = messages.join(' ')
     else
-      flash[:notice] = "Please fill out all fields!"
       redirect_to "/applications/new"
+      flash[:notice] = "Please fill out all fields!"
     end
   end
 
   def index
     pet = Pet.find(params[:pet_id])
     @applications = pet.applications
+  end
+  
+  def show
+    @application = Application.find(params[:id])
   end
 
 private

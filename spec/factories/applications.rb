@@ -8,4 +8,4 @@ FactoryBot.define do
     phone_number    {Faker::PhoneNumber.phone_number}
     description     {Faker::TvShows::HeyArnold.quote}
   end
-end 
+end
