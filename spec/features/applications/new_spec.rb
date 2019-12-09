@@ -62,7 +62,38 @@ describe "new application" do
     expect(page).to have_content "Please fill out all fields!"
   end
 
-  it "has a link to application form from favorites" do
+  it "doesn't accept invalid application (pets selected, but fields missed)" do
+    pet_1 = create(:random_pet)
+    pet_2 = create(:random_pet)
+    pet_3 = create(:random_pet)
+    
+    visit "/pets/#{pet_1.id}"
+    click_button "Add #{pet_1.name} to Favorites"
+    visit "/pets/#{pet_2.id}"
+    click_button "Add #{pet_2.name} to Favorites"
+    visit "/pets/#{pet_3.id}"
+    click_button "Add #{pet_3.name} to Favorites"
+    
+    visit "/favorites"
+    click_button "Start Adoption Application"
+    
+    within "#pet-#{pet_1.name}" do
+      check "pets_applied_for_"
+    end
+    within "#pet-#{pet_2.name}" do
+      check "pets_applied_for_"
+    end
+    within "#pet-#{pet_3.name}" do
+      uncheck "pets_applied_for_"
+    end
+
+    click_button "Submit Application"
+    
+    expect(current_path).to eq "/applications/new"
+    expect(page).to have_content "Please fill out all fields!"
+  end
+
+  it "has a link to application form from favorites (happy path)" do
     pet_1 = create(:random_pet)
     pet_2 = create(:random_pet)
     pet_3 = create(:random_pet)
