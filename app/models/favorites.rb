@@ -14,8 +14,11 @@ class Favorites
     contents.values.sum
   end
 
-  def delete_pet(id)
-    contents.delete(id.to_s)
+  def delete_pets(ids)
+    ids.each { |id| contents.delete(id.to_s) }
   end
 
+  def empty?
+    @contents == {}
+  end
 end
