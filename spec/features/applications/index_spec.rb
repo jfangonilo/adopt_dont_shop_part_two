@@ -15,16 +15,16 @@ describe "application index page" do
     expect(current_path).to eq "/pets/#{pet.id}/applications"
 
     within "#application-#{application_1.id}" do
-      expect(page).to have_content application_1.name
+      expect(page).to have_link application_1.name
     end
     within "#application-#{application_2.id}" do
-      expect(page).to have_content application_2.name
+      expect(page).to have_link application_2.name
     end
     within "#application-#{application_3.id}" do
-      expect(page).to have_content application_3.name
+      expect(page).to have_link application_3.name
     end
 
-    click_link application_1.name
+    # click_link application_1.name
     # expect(current_path).to eq "applications/#{application_1.id}"
   end
 end
