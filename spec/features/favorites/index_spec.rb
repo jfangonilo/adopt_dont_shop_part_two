@@ -60,17 +60,39 @@ RSpec.describe "favorites index page" do
      visit "/pets/#{pet_3.id}"
     click_button "Add #{pet_3.name} to Favorites"
 
-    application_1 = create(:application)
-    application_1.pets << pet_1
-    application_2 = create(:application)
-    application_2.pets << pet_1
-    application_3 = create(:application)
-    application_3.pets << pet_2
+    visit "/favorites"
+    click_button "Start Adoption Application"
+
+    within "#pet-#{pet_1.name}" do
+      check "pets_applied_for_"
+    end
+
+    within "#pet-#{pet_2.name}" do
+      check "pets_applied_for_"
+    end
+
+    name = "Madelyn"
+    address = "922 E. Watson Dr."
+    city = "Tempe"
+    state = "CO"
+    zip = "80110"
+    phone_number = "3032502248"
+    description = "I LOVE CATS"
+
+    fill_in "name", with: name
+    fill_in "address", with: address
+    fill_in "city", with: city
+    fill_in "state", with: state
+    fill_in "zip", with: zip
+    fill_in "phone_number", with: phone_number
+    fill_in "description", with: description
+
+    click_button "Submit Application"
 
     visit '/favorites'
     within "#favorites-list" do
       expect(page).to have_content("All Pets with Applications")
-      
+
       click_link("#{pet_1.name}")
       expect(current_path).to eq("/pets/#{pet_1.id}")
     end
