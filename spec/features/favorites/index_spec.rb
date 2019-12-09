@@ -59,6 +59,16 @@ RSpec.describe "favorites index page" do
     pet_1 = create(:random_pet)
     pet_2 = create(:random_pet)
     pet_3 = create(:random_pet)
+
+    visit "/pets/#{pet_1.id}"
+    click_button "Add #{pet_1.name} to Favorites"
+
+    visit "/pets/#{pet_2.id}"
+    click_button "Add #{pet_2.name} to Favorites"
+
+     visit "/pets/#{pet_3.id}"
+    click_button "Add #{pet_3.name} to Favorites"
+
     application_1 = create(:application)
     application_1.pets << pet_1
     application_2 = create(:application)
