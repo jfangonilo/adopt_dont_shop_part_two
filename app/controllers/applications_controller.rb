@@ -27,6 +27,10 @@ class ApplicationsController < ApplicationController
   def index
     pet = Pet.find(params[:pet_id])
     @applications = pet.applications
+
+    if @applications.empty?
+      flash[:notice] = "Show this one some love! No one has applied yet!"
+    end
   end
   
   def show
