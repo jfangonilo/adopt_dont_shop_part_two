@@ -25,13 +25,25 @@ RSpec.describe Favorites do
     end
   end
 
-  describe "#delete_pet" do
-    it "deletes pet from favorites" do
+  describe "#delete_pets" do
+    it "deletes pet(s) from favorites" do
       list = Favorites.new
       list.add_pet(1)
-      list.delete_pet(1)
+      list.delete_pets([1])
 
       expect(list.contents).to eq({})
+      
+      list.add_pet(1)
+      list.add_pet(2)
+      list.delete_pets([1,2])
+      expect(list.contents).to eq({})
+    end
+  end
+
+  describe "#empty?" do
+    it "returns true if empty" do
+      list = Favorites.new
+      expect(list.empty?).to eq true
     end
   end
 

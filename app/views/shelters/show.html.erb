@@ -1,6 +1,6 @@
 <section class = "wrapper">
   <h1><%= link_to @shelter.name, "/shelters/#{@shelter.id}/pets" %></h1>
-  <p><%= @shelter.address %>, <%= @shelter.city %> <%= @shelter.state %> <%= @shelter.zip %></p>
+  <p><%= @shelter.address %> <%= @shelter.city %>, <%= @shelter.state %> <%= @shelter.zip %></p>
   <p><%= link_to "Update", "/shelters/#{@shelter.id}/edit" %>
   <%= link_to "Delete", "/shelters/#{@shelter.id}", method: "delete" %></p>
 

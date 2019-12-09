@@ -13,6 +13,6 @@ class Shelter < ApplicationRecord
   end
 
   def self.alpha_sort
-    all.order(name: :ASC)
+    order(name: :ASC)
   end
 end
