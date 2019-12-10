@@ -6,12 +6,14 @@
 <%= @application.phone_number %><br>
 <%= @application.description %><br>
 <% @application.pets.each do |pet| %>
+
   <section id="pet-<%= pet.id %>">
     <%= link_to pet.name, "/pets/#{pet.id}" %><br>
     <% if pet.adoptable? %>
       <%= link_to "Approve Application for #{pet.name}", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %>
     <% else %>
-      <%= link_to "Revoke Application for #{pet.name}", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %>
+      <%= link_to "Revoke Application for #{pet.name}", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %><br>
+      <%= pet.name %> is already pending adoption! No more adoption approvals can be made at this time
     <% end %>
   </section>
 <% end %><br>

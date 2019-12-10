@@ -15,7 +15,7 @@ describe "applications show page" do
   it "allows you to approve a pet's application" do
     pet_1 = create(:random_pet)
     pet_2 = create(:random_pet)
-    
+
     application = create(:application)
     application.pets << [pet_1, pet_2]
 
@@ -24,20 +24,20 @@ describe "applications show page" do
 
     visit "/applications/#{application_2.id}"
     within "#pet-#{pet_2.id}" do
-      click_link "Approve Application for #{pet_2.name}"  
+      click_link "Approve Application for #{pet_2.name}"
     end
 
     expect(current_path).to eq "/pets/#{pet_2.id}"
     within "#adoptable-status" do
       expect(page).to have_content "Adoption Pending: #{application_2.name}"
     end
-  end  
+  end
 
   it "shows the application and the names of pets (links) applied for" do
     pet_1 = create(:random_pet)
     pet_2 = create(:random_pet)
     pet_3 = create(:random_pet)
-  
+
     application = create(:application)
     application.pets << [pet_1, pet_2, pet_3]
 
@@ -55,6 +55,28 @@ describe "applications show page" do
 
     click_link pet_1.name
     expect(current_path).to eq "/pets/#{pet_1.id}"
+  end
+
+  it "does not allow more than one approved application per pet and shows flash message that already approved" do
+    pet_1 = create(:random_pet)
+    pet_2 = create(:random_pet)
+
+    application_1 = create(:application)
+    application_2 = create(:application)
+
+    application_1.pets << pet_1
+    application_2.pets << [pet_1, pet_2]
+
+    visit "/applications/#{application_1.id}"
+    within "#pet-#{pet_1.id}" do
+      click_link "Approve Application for #{pet_1.name}"
+    end
+
+    visit "/applications/#{application_2.id}"
+
+    expect(page).not_to have_link("Approve Application for #{pet_1.name}")
+    expect(page).to have_link("Approve Application for #{pet_2.name}")
+    expect(page).to have_content("#{pet_1.name} is already pending adoption! No more adoption approvals can be made at this time.")
   end
 
   it "allows you to revoke an approved application" do
@@ -86,5 +108,5 @@ describe "applications show page" do
     within "#adoptable-status" do
     expect(page).to have_content "Adoption Pending"
   end
-  end
 end
+
