@@ -22,11 +22,11 @@ describe Application do
       application = create(:application)
       application.pets << pet
 
-      pet.deny_approval
+      application.deny_approval
 
       expect(current_path).to eq("/applications/#{application.id}")
       expect(page).to have_content("#{pet.name} is already pending adoption! No more adoption approvals can be made at this time.")
-      
+
     end
   end
 end
