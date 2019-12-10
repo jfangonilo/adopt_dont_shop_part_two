@@ -17,15 +17,21 @@ class Pet < ApplicationRecord
   end
 
   def adoptable?
-    self.adoptable
+    adoptable
   end
 
   def toggle_adoptable
-    self.toggle! :adoptable
+    toggle! :adoptable
   end
 
   def self.sort_adoptable
-    all.order(adoptable: :DESC)
+    order(adoptable: :DESC)
+  end
+
+  def applicant_name
+    pet_applications.find_by(pending: true).application.name
+    # pet_id = self.id
+    # Pet.select('applications.name').joins(:pet_applications).joins(:applications).where('pet_applications.pending =  true').pluck('applications.name').first
   end
 
   def self.find_all_with_applications

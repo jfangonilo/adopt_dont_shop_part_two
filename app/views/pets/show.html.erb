@@ -2,24 +2,24 @@
   <h1><%= @pet.name %></h1>
   <%= link_to "See Applications", "/pets/#{@pet.id}/applications" %>
   <%= image_tag @pet.image %>
-    <% if favorites.contents.keys.include? @pet.id.to_s %>
+    <% if favorites.is_included?(@pet.id) %>
       <%= button_to "Remove #{@pet.name} from Favorites", "/favorites/#{@pet.id}", method: :delete %>
     <% else %>
       <%= button_to "Add #{@pet.name} to Favorites", "/favorites/#{@pet.id}", method: :patch %>
     <% end %>
   <p><%= @pet.description %><p>
   <p><%= @pet.approximate_age %> y/o <%= @pet.sex %></p>
+
   <% if @pet.adoptable? %>
     <section id="adoptable-status">
       <p>Adoptable</p>
     </section>
-    <p><%= link_to "Change to Adoption Pending", "/pets/#{@pet.id}/pending", method: "patch" %></p>
   <% else %>
     <section id="adoptable-status">
-      <p>Adoption Pending</p>
+      <p>Adoption Pending: <%= @pet.applicant_name %> </p>
     </section>
-    <p><%= link_to "Change to Adoptable", "/pets/#{@pet.id}/pending", method: "patch" %></p>
   <% end %>
+  
   <p><%= link_to "Update", "/pets/#{@pet.id}/edit" %>
   <%= link_to "Delete", "/pets/#{@pet.id}", method: "delete" %></p>
 </section>

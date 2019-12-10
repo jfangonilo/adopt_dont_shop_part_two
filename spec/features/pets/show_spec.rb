@@ -37,20 +37,4 @@ describe "When I visit /pets/:id," do
     click_link "Delete"
     expect(page).to have_content "Favorites: 0"
   end
-
-  it "I can click a link to change the pet's status to Adoption Pending/Adoptable" do
-    click_link "Change to Adoption Pending"
-    expect(current_path).to eq "/pets/#{@pet.id}"
-    within "#adoptable-status" do
-      expect(page).to have_content "Adoption Pending"
-      expect(page).to_not have_content "Adoptable"
-    end
-
-    click_link "Change to Adoptable"
-    expect(current_path).to eq "/pets/#{@pet.id}"
-    within "#adoptable-status" do
-      expect(page).to_not have_content "Adoption Pending"
-      expect(page).to have_content "Adoptable"
-    end
-  end
 end

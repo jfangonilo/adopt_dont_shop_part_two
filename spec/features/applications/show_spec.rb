@@ -1,6 +1,27 @@
 require "rails_helper"
 
 describe "applications show page" do
+  it "allows you to approve a pet's application" do
+    pet_1 = create(:random_pet)
+    pet_2 = create(:random_pet)
+    
+    application = create(:application)
+    application.pets << [pet_1, pet_2]
+
+    application_2 = create(:application)
+    application_2.pets << [pet_1, pet_2]
+
+    visit "/applications/#{application_2.id}"
+    within "#pet-#{pet_2.id}" do
+      click_link "Approve Application for #{pet_2.name}"  
+    end
+
+    expect(current_path).to eq "/pets/#{pet_2.id}"
+    within "#adoptable-status" do
+      expect(page).to have_content "Adoption Pending: #{application_2.name}"
+    end
+  end  
+
   it "shows the application and the names of pets (links) applied for" do
     pet_1 = create(:random_pet)
     pet_2 = create(:random_pet)

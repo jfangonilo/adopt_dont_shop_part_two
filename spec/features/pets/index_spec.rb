@@ -58,8 +58,27 @@ describe "As a user, when I visit the pet index page," do
 
   it "I can see the pets by adoptable status" do
     expect(page.body.index(@pet_1.name)).to be < page.body.index(@pet_2.name)
+
     visit "/pets/#{@pet_1.id}"
-    click_link "Change to Adoption Pending"
+    click_button "Add #{@pet_1.name} to Favorites"
+    click_link "Favorites: 1"
+    click_button "Start Adoption Application"
+
+    check "pets_applied_for_"
+    fill_in "name", with: "test name"
+    fill_in "address", with: "test address"
+    fill_in "city", with: "test city"
+    fill_in "state", with: "test state"
+    fill_in "zip", with: "test zip"
+    fill_in "phone_number", with: "test phone_number"
+    fill_in "description", with: "test description"
+
+    click_button "Submit Application"
+    visit "pets/#{@pet_1.id}/applications"
+
+    click_link "test name"
+    click_link "Approve Application for #{@pet_1.name}"
+
     visit "/pets"
     expect(page.body.index(@pet_2.name)).to be < page.body.index(@pet_1.name)
   end

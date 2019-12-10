@@ -47,4 +47,12 @@ RSpec.describe Favorites do
     end
   end
 
+  describe "#is_included?" do
+    it "check if pet is included" do
+      list = Favorites.new
+      expect(list.is_included?(1)).to eq false
+      list.add_pet(1)
+      expect(list.is_included?(1)).to eq true
+    end
+  end
 end
