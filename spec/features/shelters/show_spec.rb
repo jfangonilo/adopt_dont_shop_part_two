@@ -114,4 +114,17 @@ describe "As a visitor, when I visit /shelters/:id," do
     expect(page).not_to have_content(@reviews[0].content)
     expect(page).not_to have_content(@reviews[0].picture)
   end
+
+  it "displays count of pets at the shelter" do
+    shelter = create(:random_shelter)
+    pet_1 = create(:random_pet)
+    pet_2 = create(:random_pet)
+    pet_3 = create(:random_pet)
+
+    visit "/shelters/#{shelter.id}"
+
+    within "shelter_statistics" do
+      expect(page).to have_content("Pets at Shelter: 3")
+    end
+  end
 end
