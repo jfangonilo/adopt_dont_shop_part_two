@@ -75,5 +75,16 @@ describe Pet, type: :model do
       @pet_1.adoptable = false
       expect(Pet.sort_adoptable).to match_array [@pet_2, @pet_1]
     end
+
+    it ".find_all_with_applications" do
+      pet_1 = create(:random_pet)
+      pet_2 = create(:random_pet)
+      pet_3 = create(:random_pet)
+      application = create(:application)
+
+      application.pets << [pet_1, pet_2]
+
+      expect(Pet.find_all_with_applications).to eq([pet_1, pet_2])
+    end
   end
 end

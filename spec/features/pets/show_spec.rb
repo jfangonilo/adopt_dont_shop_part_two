@@ -21,7 +21,7 @@ describe "When I visit /pets/:id," do
     expect(current_path).to eq "/pets/#{@pet.id}/edit"
   end
 
-  it "I can delete a shelter via a link" do
+  it "I can delete a pet via a link" do
     click_link "Delete"
 
     expect(current_path).to eq "/pets"
@@ -30,5 +30,11 @@ describe "When I visit /pets/:id," do
     expect(page).to_not have_content @pet.approximate_age
     expect(page).to_not have_content @pet.sex
     expect(page).to_not have_content @pet.description
+  end
+
+  it "I can delete a favorited pet and it's removed from favorites" do
+    click_button "Add #{@pet.name} to Favorites"
+    click_link "Delete"
+    expect(page).to have_content "Favorites: 0"
   end
 end

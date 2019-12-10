@@ -15,7 +15,7 @@ describe "As a visitor, when I visit /shelters/:id/edit," do
     fill_in "zip",     with: "test shelter zip"
 
     click_button "Update"
-    
+
     expect(current_path).to eq "/shelters/#{@shelter_1.id}"
 
     expect(page).to have_content "test shelter"
@@ -29,5 +29,12 @@ describe "As a visitor, when I visit /shelters/:id/edit," do
     expect(page).to_not have_content @shelter_1.city
     expect(page).to_not have_content @shelter_1.state
     expect(page).to_not have_content @shelter_1.zip
+  end
+
+  it "redirects to shelters/new page and displays flash message if not all fields filled in" do
+    click_button "Update"
+
+    expect(current_path).to eq("/shelters/#{@shelter_1.id}/edit")
+    expect(page).to have_content("Please fill out all fields!")
   end
 end
