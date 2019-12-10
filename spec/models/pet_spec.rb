@@ -95,7 +95,11 @@ describe Pet, type: :model do
       application_1.pets << [pet_1, pet_2]
       application_2.pets << [pet_1, pet_2]
 
-      expect(Pet.find_all_with_applications).to eq([pet_1, pet_2])
+      expect(Pet.find_all_with_applications.length).to eq(2)
+      expect(Pet.find_all_with_applications.include?(pet_1)).to eq(true)
+      expect(Pet.find_all_with_applications.include?(pet_2)).to eq(true)
+
+      # expect(Pet.find_all_with_applications).to eq([pet_1, pet_2])
     end
   end
 end
