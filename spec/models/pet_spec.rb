@@ -52,6 +52,11 @@ describe Pet, type: :model do
     it ".adoptable? initially returns adoptable" do
       expect(@pet_1.adoptable?).to eq true
     end
+    
+    it ".toggle_adoptable" do
+      @pet_1.toggle_adoptable
+      expect(@pet_1.adoptable?).to eq false
+    end
 
     it ".sort_adoptable" do
       expect(Pet.all).to match_array [@pet_1, @pet_2]
