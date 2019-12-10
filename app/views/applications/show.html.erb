@@ -6,6 +6,7 @@
 <%= @application.phone_number %><br>
 <%= @application.description %><br>
 <% @application.pets.each do |pet| %>
+
   <section id="pet-<%= pet.id %>">
     <%= link_to pet.name, "/pets/#{pet.id}" %><br>
     <%= link_to "Approve Application for #{pet.name}", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %>
