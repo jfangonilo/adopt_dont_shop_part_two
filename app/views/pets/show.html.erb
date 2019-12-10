@@ -14,12 +14,10 @@
     <section id="adoptable-status">
       <p>Adoptable</p>
     </section>
-    <p><%= link_to "Change to Adoption Pending", "/pets/#{@pet.id}/pending", method: "patch" %></p>
   <% else %>
     <section id="adoptable-status">
-      <p>Adoption Pending: </p>
+      <p>Adoption Pending: <%= @pet.applicant_name %> </p>
     </section>
-    <p><%= link_to "Change to Adoptable", "/pets/#{@pet.id}/pending", method: "patch" %></p>
   <% end %>
   
   <p><%= link_to "Update", "/pets/#{@pet.id}/edit" %>
