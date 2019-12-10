@@ -54,6 +54,10 @@ describe "applications show page" do
     visit "/applications/#{app.id}"
     click_link "Approve Application for #{pet.name}"
     
+    within "#adoptable-status" do
+      expect(page).to have_content "Adoption Pending"
+    end
+
     visit "/applications/#{app.id}"
     click_link "Revoke Application for #{pet.name}"
 
@@ -64,5 +68,12 @@ describe "applications show page" do
     within "#adoptable-status" do
       expect(page).to have_content "Adoptable"
     end
+
+    visit "/applications/#{app.id}"
+    click_link "Approve Application for #{pet.name}"
+
+    within "#adoptable-status" do
+    expect(page).to have_content "Adoption Pending"
+  end
   end
 end
