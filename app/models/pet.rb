@@ -9,7 +9,7 @@ class Pet < ApplicationRecord
   validates_numericality_of :approximate_age
 
   belongs_to :shelter
-  has_many :pet_applications
+  has_many :pet_applications, dependent: :destroy
   has_many :applications, through: :pet_applications
 
   def shelter_name
