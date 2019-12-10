@@ -31,6 +31,7 @@ class SheltersController < ApplicationController
       redirect_to "/shelters/#{shelter.id}"
     else
       redirect_to "/shelters/#{shelter.id}/edit"
+      flash[:notice] = "Please fill out all fields!"
     end
   end
 
