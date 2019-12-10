@@ -30,8 +30,6 @@ class Pet < ApplicationRecord
 
   def applicant_name
     pet_applications.find_by(pending: true).application.name
-    # pet_id = self.id
-    # Pet.select('applications.name').joins(:pet_applications).joins(:applications).where('pet_applications.pending =  true').pluck('applications.name').first
   end
 
   def self.find_all_with_applications

@@ -1,6 +1,17 @@
 require "rails_helper"
 
 describe "applications show page" do
+  it "allows me to approve multiple applications" do
+    pets = create_list(:random_pet, 2)
+    app = create(:application)
+    app.pets << pets
+
+    visit "/applications/#{app.id}"
+    click_link "Approve Application for #{pets[0].name}"
+    visit "/applications/#{app.id}"
+    click_link "Approve Application for #{pets[1].name}"
+  end
+
   it "allows you to approve a pet's application" do
     pet_1 = create(:random_pet)
     pet_2 = create(:random_pet)
@@ -67,4 +78,35 @@ describe "applications show page" do
     expect(page).to have_link("Approve Application for #{pet_2.name}")
     expect(page).to have_content("#{pet_1.name} is already pending adoption! No more adoption approvals can be made at this time.")
   end
+
+  it "allows you to revoke an approved application" do
+    pet = create(:random_pet)
+    app = create(:application)
+    app.pets << pet
+
+    visit "/applications/#{app.id}"
+    click_link "Approve Application for #{pet.name}"
+    
+    within "#adoptable-status" do
+      expect(page).to have_content "Adoption Pending"
+    end
+
+    visit "/applications/#{app.id}"
+    click_link "Revoke Application for #{pet.name}"
+
+    expect(current_path).to eq "/applications/#{app.id}"
+    expect(page).to have_link "Approve Application for #{pet.name}"
+
+    visit "/pets/#{pet.id}"
+    within "#adoptable-status" do
+      expect(page).to have_content "Adoptable"
+    end
+
+    visit "/applications/#{app.id}"
+    click_link "Approve Application for #{pet.name}"
+
+    within "#adoptable-status" do
+    expect(page).to have_content "Adoption Pending"
+  end
 end
+
