@@ -47,21 +47,24 @@ describe "applications show page" do
   end
 
   it "does not allow more than one approved application per pet and shows flash message that already approved" do
-    pet = create(:random_pet)
+    pet_1 = create(:random_pet)
+    pet_2 = create(:random_pet)
+
     application_1 = create(:application)
     application_2 = create(:application)
 
-    application_1.pets << pet
-    application_2.pets << pet
+    application_1.pets << pet_1
+    application_2.pets << [pet_1, pet_2]
 
     visit "/applications/#{application_1.id}"
-    within "#pet-#{pet.id}" do
-      click_link "Approve Application for #{pet.name}"
+    within "#pet-#{pet_1.id}" do
+      click_link "Approve Application for #{pet_1.name}"
     end
 
     visit "/applications/#{application_2.id}"
 
-    expect(page).not_to have_content("Approve Application for #{pet.name}")
-    expect(page).to have_content("#{pet.name} is already pending adoption! No more adoption approvals can be made at this time.")
+    expect(page).not_to have_link("Approve Application for #{pet_1.name}")
+    expect(page).to have_link("Approve Application for #{pet_2.name}")
+    expect(page).to have_content("#{pet_1.name} is already pending adoption! No more adoption approvals can be made at this time.")
   end
 end
