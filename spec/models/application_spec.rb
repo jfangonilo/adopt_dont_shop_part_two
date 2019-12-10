@@ -15,18 +15,4 @@ describe Application do
     it {should validate_presence_of :phone_number}
     it {should validate_presence_of :description}
   end
-
-  describe "#deny_approval" do
-    it "denies application approval" do
-      pet = create(:random_pet)
-      application = create(:application)
-      application.pets << pet
-
-      application.deny_approval
-
-      expect(current_path).to eq("/applications/#{application.id}")
-      expect(page).to have_content("#{pet.name} is already pending adoption! No more adoption approvals can be made at this time.")
-
-    end
-  end
 end
