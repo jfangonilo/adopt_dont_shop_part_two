@@ -45,4 +45,24 @@ describe "applications show page" do
     click_link pet_1.name
     expect(current_path).to eq "/pets/#{pet_1.id}"
   end
+
+  it "allows you to revoke an approved application" do
+    pet = create(:random_pet)
+    app = create(:application)
+    app.pets << pet
+
+    visit "/applications/#{app.id}"
+    click_link "Approve Application for #{pet.name}"
+    
+    visit "/applications/#{app.id}"
+    click_link "Revoke Application for #{pet.name}"
+
+    expect(current_path).to eq "/applications/#{app.id}"
+    expect(page).to have_link "Approve Application for #{pet.name}"
+
+    visit "/pets/#{pet.id}"
+    within "#adoptable-status" do
+      expect(page).to have_content "Adoptable"
+    end
+  end
 end
