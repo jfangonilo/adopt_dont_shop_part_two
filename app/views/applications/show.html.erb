@@ -13,7 +13,7 @@
     <% if pet.adoptable? %>
       <%= link_to "Approve Application for #{pet.name}", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %>
     <% elsif pet.adoptable? == false && @application.id == pet.applicant_id %>
-      <p>You have already approved application!</p>
+      <p>You are already approved!</p>
       <%= link_to "Revoke Application for #{pet.name}", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %><br>
     <% else %>
       <%= link_to "Revoke Application for #{pet.name}", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %><br>
