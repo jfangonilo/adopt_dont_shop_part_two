@@ -95,7 +95,7 @@ describe "applications show page" do
 
     visit "/applications/#{application_1.id}"
 
-    expect(page).to have_content("You have already approved application!")
+    expect(page).to have_content("You are already approved!")
     expect(page).not_to have_content("#{pet_1.name} is already pending adoption! No more adoption approvals can be made at this time.")
   end
 
