@@ -37,12 +37,13 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
   end
 
-  def update
-    @application_id = params[:application_id]
-    pet = Pet.find(params[:pet_id])
-    pet.toggle_adoptable
-    render "/pets/#{pet.id}"
-  end
+  # def update 
+  #   @application_id = params[:application_id]
+  #   pet = Pet.find(params[:pet_id])
+  #   pet.toggle_adoptable
+  #   render "/pets/#{pet.id}"
+  # end
+  # might still need this
 
 private
   def application_params
