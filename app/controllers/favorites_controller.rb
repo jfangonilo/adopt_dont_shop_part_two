@@ -1,6 +1,8 @@
 class FavoritesController < ApplicationController
 
   def index
+    @pets_with_apps = Pet.find_all_with_applications
+
     session[:favorites] ||= Hash.new(0)
     favorite_ids = session[:favorites].keys
     @pets = favorite_ids.map(&:to_i).map{|id| Pet.find(id)}

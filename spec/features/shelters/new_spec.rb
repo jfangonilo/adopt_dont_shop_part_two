@@ -14,4 +14,13 @@ describe "As a visitor, when I visit shelters/new," do
     expect(current_path).to eq "/shelters"
     expect(page).to have_content "test shelter"
   end
+
+  it "returns flash message if required fields not filled in" do
+    visit '/shelters/new'
+    click_button "Submit"
+
+    expect(current_path).to eq('/shelters/new')
+    expect(page).to have_content("Please fill out all fields!")
+
+  end
 end
