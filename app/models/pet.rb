@@ -27,4 +27,8 @@ class Pet < ApplicationRecord
   def self.sort_adoptable
     order(adoptable: :DESC)
   end
+
+  def applicant_name
+    Pet.select('applications.name').joins(:pet_applications).joins(:applications).where('pet_applications.pending =  true').pluck('applications.name').first
+  end
 end
