@@ -11,14 +11,14 @@ describe "applications show page" do
     application_2 = create(:application)
     application_2.pets << [pet_1, pet_2]
 
-    visit "/applications/#{application.id}"
-    within "#pet-#{pet_1.id}" do
-      click_link "Approve Application for #{pet_1.name}"  
+    visit "/applications/#{application_2.id}"
+    within "#pet-#{pet_2.id}" do
+      click_link "Approve Application for #{pet_2.name}"  
     end
 
-    expect(current_path).to eq "/pets/#{pet_1.id}"
+    expect(current_path).to eq "/pets/#{pet_2.id}"
     within "#adoptable-status" do
-      expect(page).to have_content "Adoption Pending: #{application.name}"
+      expect(page).to have_content "Adoption Pending: #{application_2.name}"
     end
   end  
 
