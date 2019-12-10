@@ -63,5 +63,11 @@ describe Pet, type: :model do
       @pet_1.adoptable = false
       expect(Pet.sort_adoptable).to match_array [@pet_2, @pet_1]
     end
+
+    it ".applicant_name" do
+      app = create(:application)
+      app.pets << @pet_1
+      expect(@pet_1.applicant_name).to eq app.name
+    end
   end
 end
