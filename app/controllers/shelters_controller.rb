@@ -27,8 +27,11 @@ class SheltersController < ApplicationController
   def update
     shelter = Shelter.find(params[:id])
     shelter.update(shelter_params)
-    shelter.save
-    redirect_to "/shelters/#{shelter.id}"
+    if shelter.save
+      redirect_to "/shelters/#{shelter.id}"
+    else
+      redirect_to "/shelters/#{shelter.id}/edit"
+    end
   end
 
   def destroy
