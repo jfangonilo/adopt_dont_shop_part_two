@@ -39,4 +39,8 @@ class Pet < ApplicationRecord
   def self.find_all_with_applications
     pets = Pet.select('pets.*').joins(:applications)
   end
+
+  def pending_adoption?
+    true if pet_applications.find_by(pending: :true)
+  end
 end
