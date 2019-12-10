@@ -27,4 +27,8 @@ class Pet < ApplicationRecord
   def self.sort_adoptable
     all.order(adoptable: :DESC)
   end
+
+  def self.find_all_with_applications
+    pets = Pet.select('pets.*').joins(:applications)
+  end
 end
