@@ -10,7 +10,7 @@ describe "pets can't be deleted if they have an approved application;" do
 
     visit "/pets/#{pet.id}"
     click_link "Delete"
-    expect(pet).to exist
+    expect(current_path).to eq "/pets/#{pet.id}"
     expect(page).to have_content "Approved application pending. Cannot delete pet"
   end
 end
