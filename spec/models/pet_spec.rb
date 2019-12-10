@@ -67,6 +67,16 @@ describe Pet, type: :model do
       app_1.pet_applications.first.update(pending: true)
       expect(@pet_1.applicant_name).to eq app_1.name
     end
+
+    it ".applicant_id" do
+      application_1 = create(:application)
+      application_2 = create(:application)
+      application_1.pets << @pet_1
+      application_2.pets << @pet_1
+      application_1.pet_applications.first.update(pending: true)
+
+      expect(@pet_1.applicant_id).to eq(application_1.id)
+    end
   end
 
   describe "class method" do
