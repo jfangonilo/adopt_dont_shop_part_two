@@ -37,6 +37,7 @@ class PetsController < ApplicationController
       redirect_to "/pets"
     else
       redirect_to "/pets/#{pet_id}"
+      flash[:notice] = "Approved application pending. Cannot delete pet"
     end
   end
 
