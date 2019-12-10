@@ -1,17 +1,7 @@
 <section class = "wrapper">
-  <%= form_tag "/shelters/#{@shelter_review.shelter_id}/shelter_reviews/#{@shelter_review.id}", method: :patch do %>
-    <%= label_tag :title %>
-    <%= text_field_tag :title %><br>
 
-    <%= label_tag :rating %>
-    <%= text_field_tag :rating %><br>
+  <%= render partial: 'form', locals: { path: "/shelters/#{@shelter_review.shelter_id}/shelter_reviews/#{@shelter_review.id}",
+                                        method: :patch,
+                                        button_text: 'Update'} %>
 
-    <%= label_tag :content %>
-    <%= text_field_tag :content %><br>
-
-    <%= label_tag :picture %>
-    <%= text_field_tag :picture %><br>
-
-    <%= submit_tag 'Update' %>
-  <% end %>
 </section>
