@@ -44,7 +44,7 @@ describe Pet, type: :model do
     it {should have_many(:applications).through(:pet_applications)}
   end
 
-  describe "method" do
+  describe "instance method" do
     it ".shelter_name" do
       expect(@pet_1.shelter_name).to eq "House of Seamus"
     end
@@ -58,16 +58,22 @@ describe Pet, type: :model do
       expect(@pet_1.adoptable?).to eq false
     end
 
+    it ".applicant_name" do
+      app_1 = create(:application)
+      app_2 = create(:application)
+
+      app_1.pets << @pet_1
+      app_2.pets << @pet_1
+      app_1.pet_applications.first.update(pending: true)
+      expect(@pet_1.applicant_name).to eq app_1.name
+    end
+  end
+  
+  describe "class method" do
     it ".sort_adoptable" do
       expect(Pet.all).to match_array [@pet_1, @pet_2]
       @pet_1.adoptable = false
       expect(Pet.sort_adoptable).to match_array [@pet_2, @pet_1]
-    end
-
-    it ".applicant_name" do
-      app = create(:application)
-      app.pets << @pet_1
-      expect(@pet_1.applicant_name).to eq app.name
     end
   end
 end
