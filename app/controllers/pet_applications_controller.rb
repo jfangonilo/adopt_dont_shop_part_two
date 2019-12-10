@@ -10,6 +10,6 @@ class PetApplicationsController < ApplicationController
     pet.toggle_adoptable
     pet_app.toggle_pending
 
-    render "/pets/#{pet.id}"
+    redirect_to "/pets/#{pet.id}"
   end
 end
