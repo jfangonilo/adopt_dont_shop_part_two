@@ -1,6 +1,17 @@
 require "rails_helper"
 
 describe "applications show page" do
+  it "allows me to approve multiple applications" do
+    pets = create_list(:random_pet, 2)
+    app = create(:application)
+    app.pets << pets
+
+    visit "/applications/#{app.id}"
+    click_link "Approve Application for #{pets[0].name}"
+    visit "/applications/#{app.id}"
+    click_link "Approve Application for #{pets[1].name}"
+  end
+
   it "allows you to approve a pet's application" do
     pet_1 = create(:random_pet)
     pet_2 = create(:random_pet)
