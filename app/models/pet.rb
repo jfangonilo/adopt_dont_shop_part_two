@@ -17,14 +17,14 @@ class Pet < ApplicationRecord
   end
 
   def adoptable?
-    self.adoptable
+    adoptable
   end
 
   def toggle_adoptable
-    self.toggle! :adoptable
+    toggle! :adoptable
   end
 
   def self.sort_adoptable
-    all.order(adoptable: :DESC)
+    order(adoptable: :DESC)
   end
 end
