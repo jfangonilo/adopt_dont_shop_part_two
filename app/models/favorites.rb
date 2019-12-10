@@ -6,6 +6,10 @@ class Favorites
     @contents = initial_contents
   end
 
+  def is_included?(pet_id)
+    contents.keys.include? pet_id.to_s
+  end
+
   def add_pet(id)
     contents[id.to_s] = 1
   end
