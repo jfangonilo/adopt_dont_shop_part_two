@@ -9,11 +9,16 @@
 
   <section id="pet-<%= pet.id %>">
     <%= link_to pet.name, "/pets/#{pet.id}" %><br>
+
     <% if pet.adoptable? %>
       <%= link_to "Approve Application for #{pet.name}", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %>
+    <% elsif pet.adoptable? == false && @application.name == pet.applicant_name %>
+      <p>You have already approved application!</p>
+      <%= link_to "Revoke Application for #{pet.name}", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %><br>
     <% else %>
       <%= link_to "Revoke Application for #{pet.name}", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %><br>
-      <%= pet.name %> is already pending adoption! No more adoption approvals can be made at this time
+      <p><%= pet.name %> is already pending adoption! No more adoption approvals can be made at this time.</p>
     <% end %>
+
   </section>
 <% end %><br>
