@@ -33,13 +33,6 @@ class PetsController < ApplicationController
     redirect_to "/pets"
   end
 
-  def toggle_adoptable
-    pet = Pet.find(params[:id])
-    pet.toggle_adoptable
-    pet.save
-    redirect_to "/pets/#{pet.id}"
-  end
-
 private
   def pet_params
     params.permit(:image, :name, :description, :approximate_age, :sex)
