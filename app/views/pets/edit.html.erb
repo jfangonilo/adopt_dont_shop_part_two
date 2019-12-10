@@ -1,24 +1,7 @@
 <section class = "wrapper">
   <h1><%= @pet.name %></h1>
+  <%= render partial: 'form', locals: { path: "/pets/#{@pet.id}",
+                                        method: :patch,
+                                        button_text: 'Update'} %>
 
-  <%= form_tag "/pets/#{@pet.id}", method: "patch" do %>
-    <%= label_tag :image %>
-    <%= text_field_tag :image %><br>
-
-    <%= label_tag :name %>
-    <%= text_field_tag :name %><br>
-
-    <%= label_tag :description %>
-    <%= text_field_tag :description %><br>
-
-    <%= label_tag :approximate_age %>
-    <%= text_field_tag :approximate_age %><br>
-
-    <%= label_tag(:sex, "Male") %>
-    <%= radio_button_tag(:sex, "Male") %><br>
-    <%= label_tag(:sex, "Female") %>
-    <%= radio_button_tag(:sex, "Female") %><br>
-
-    <%= submit_tag 'Update' %>
-  <% end %>
 </section>
