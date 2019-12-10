@@ -37,6 +37,6 @@ class Pet < ApplicationRecord
   end
 
   def self.find_all_with_applications
-    pets = Pet.select('pets.*').joins(:applications)
+    Pet.select('pets.*').joins(:applications).distinct
   end
 end
