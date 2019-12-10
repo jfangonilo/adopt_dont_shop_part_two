@@ -79,6 +79,26 @@ describe "applications show page" do
     expect(page).to have_content("#{pet_1.name} is already pending adoption! No more adoption approvals can be made at this time.")
   end
 
+  it "does not display already approved message on application for which approved" do
+    pet_1 = create(:random_pet)
+    pet_2 = create(:random_pet)
+    application_1 = create(:application)
+    application_2 = create(:application)
+
+    application_1.pets << pet_1
+    application_2.pets << [pet_1, pet_2]
+
+    visit "/applications/#{application_1.id}"
+    within "#pet-#{pet_1.id}" do
+      click_link "Approve Application for #{pet_1.name}"
+    end
+
+    visit "/applications/#{application_1.id}"
+
+    expect(page).to have_content("You are already approved!")
+    expect(page).not_to have_content("#{pet_1.name} is already pending adoption! No more adoption approvals can be made at this time.")
+  end
+
   it "allows you to revoke an approved application" do
     pet = create(:random_pet)
     app = create(:application)
@@ -86,7 +106,7 @@ describe "applications show page" do
 
     visit "/applications/#{app.id}"
     click_link "Approve Application for #{pet.name}"
-    
+
     within "#adoptable-status" do
       expect(page).to have_content "Adoption Pending"
     end
@@ -106,7 +126,7 @@ describe "applications show page" do
     click_link "Approve Application for #{pet.name}"
 
     within "#adoptable-status" do
-    expect(page).to have_content "Adoption Pending"
+      expect(page).to have_content "Adoption Pending"
+    end
   end
 end
-
