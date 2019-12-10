@@ -114,4 +114,40 @@ describe "As a visitor, when I visit /shelters/:id," do
     expect(page).not_to have_content(@reviews[0].content)
     expect(page).not_to have_content(@reviews[0].picture)
   end
+
+
+  #   User Story 26, Shelters with Pets that have pending status cannot be Deleted
+  #
+  # As a visitor
+  # If a shelter has approved applications for any of their pets
+  # I can not delete that shelter
+  # Either:
+  # - there is no button visible for me to delete the shelter
+  # - if I click on the delete link for deleting a shelter, I see a flash message indicating that the shelter can not be deleted.
+
+  it "cannot delete shelter if any pets have approved applications" do
+    shelter = create(:random_shelter)
+    pet = create(:random_pet, shelter: shelter)
+    application = create(:application)
+    application.pets << pet
+    visit "/applications/#{application.id}"
+    click_link "Approve Application for #{pet.name}"
+
+    visit "/shelters"
+    within "#shelter-#{shelter.id}" do
+      click_link 'Delete'
+      expect(current_path).to eq("/shelters")
+      expect(page).to have_content("#{shelter.name}")
+      expect(page).to have_content("Cannot delete #{shelter.name}, pending adoptions.")
+    end
+
+    visit "/shelters/#{shelter.id}"
+    within "#shelter-#{shelter.id}" do
+      click_link 'Delete'
+      expect(current_path).to eq("/shelters/#{shelter.id}")
+      expect(page).to have_content("#{shelter.name}")
+      expect(page).to have_content("Cannot delete #{shelter.name}, pending adoptions.")
+    end
+  end
+
 end
