@@ -12,8 +12,11 @@ class SheltersController < ApplicationController
 
   def create
     shelter = Shelter.new(shelter_params)
-    shelter.save
-    redirect_to '/shelters'
+    if shelter.save
+      redirect_to '/shelters'
+    else
+      redirect_to '/shelters/new'
+    end
   end
 
   def edit
