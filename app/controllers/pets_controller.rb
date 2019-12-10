@@ -34,8 +34,10 @@ class PetsController < ApplicationController
     unless pet.pending_adoption?
       favorites.delete_pets([pet_id])
       Pet.destroy(pet_id)
+      redirect_to "/pets"
+    else
+      redirect_to "/pets/#{pet_id}"
     end
-    redirect_to "/pets"
   end
 
 private
