@@ -125,18 +125,20 @@ describe "As a visitor, when I visit /shelters/:id," do
   # - there is no button visible for me to delete the shelter
   # - if I click on the delete link for deleting a shelter, I see a flash message indicating that the shelter can not be deleted.
 
-  xit "cannot delete shelter if any pets have approved applications" do
+  it "cannot delete shelter if any pets have approved applications" do
     shelter_1 = create(:random_shelter)
-    pet = create(:random_pet, shelter: shelter_1)
+    pet_1 = create(:random_pet, shelter: shelter_1)
+    pet_2 = create(:random_pet, shelter: shelter_1)
     application = create(:application)
-    application.pets << pet
+    application.pets << [pet_1, pet_2]
     visit "/applications/#{application.id}"
-    click_link "Approve Application for #{pet.name}"
+    click_link "Approve Application for #{pet_1.name}"
 
     visit "/shelters"
     within "#shelter-#{shelter_1.id}" do
       expect(page).not_to have_content('Delete')
     end
+    expect(page).to have_content("Cannot delete #{shelter_1.name}, pets pending adoption.")
   end
 
   it "can delete shelter with pets if no pets have approved applications" do
