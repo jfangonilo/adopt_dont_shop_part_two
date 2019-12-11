@@ -17,6 +17,6 @@ class Shelter < ApplicationRecord
   end
 
   def pets_pending
-    pets.any? {|pet| !pet.adoptable }
+    pets.where(adoptable: false).any?
   end
 end
