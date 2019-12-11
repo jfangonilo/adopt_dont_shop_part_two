@@ -109,4 +109,18 @@ RSpec.describe "favorites index page" do
     end
   end
 
+  it " shows pets with approved applications" do
+    pet = create(:random_pet)
+    app = create(:application)
+    app.pets << pet
+    pet.update(adoptable: false)
+    app.pet_applications.first.update(pending: true)
+
+    visit "/favorites"
+    within "#approved-applications" do
+      expect(page).to have_content "Pending Approval"
+      click_link pet.name
+    end
+    expect(current_path).to eq "/pets/#{pet.id}"
+  end
 end
