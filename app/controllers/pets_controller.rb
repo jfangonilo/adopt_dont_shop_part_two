@@ -36,8 +36,8 @@ class PetsController < ApplicationController
       Pet.destroy(pet_id)
       redirect_to "/pets"
     else
-      redirect_to "/pets/#{pet_id}"
-      flash[:notice] = "Approved application pending. Cannot delete pet"
+      redirect_back(fallback_location: "/pets/#{pet_id}")
+      flash[:notice] = "Approved application pending. Cannot delete #{pet.name}"
     end
   end
 
