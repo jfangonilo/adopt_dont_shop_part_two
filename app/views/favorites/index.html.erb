@@ -20,6 +20,9 @@
     <% end %></p>
   </section>
   <section id = "approved-applications">
-
-  </section>
+    <h2>Pending Approval</h2>
+    <% Pet.all_with_pending_application.each do |pet| %>
+      <%= link_to pet.name, "/pets/#{pet.id}" %>
+    <% end %>
+  </section><br>
 </section>
