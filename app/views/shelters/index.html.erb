@@ -1,6 +1,6 @@
+<h1>Shelters</h1>
 <section class = "wrapper">
-  <h1>Shelters</h1>
-  <h4><%= link_to "New Shelter", "/shelters/new" %></h4>
+  <h3><%= link_to "New Shelter", "/shelters/new" %></h3>
   <% @shelters.each do |shelter| %>
     <section id="shelter-<%= shelter.id %>">
       <h2><%= link_to shelter.name, "/shelters/#{shelter.id}" %></h2>

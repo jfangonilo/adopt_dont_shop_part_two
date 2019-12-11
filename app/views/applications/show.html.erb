@@ -1,24 +1,20 @@
-<%= @application.name %><br>
-<%= @application.address %><br>
-<%= @application.city %><br>
-<%= @application.state %><br>
-<%= @application.zip %><br>
-<%= @application.phone_number %><br>
-<%= @application.description %><br>
-<% @application.pets.each do |pet| %>
-
-  <section id="pet-<%= pet.id %>">
-    <%= link_to pet.name, "/pets/#{pet.id}" %><br>
-
-    <% if pet.adoptable? %>
-      <%= link_to "Approve Application for #{pet.name}", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %>
-    <% elsif pet.adoptable? == false && @application.id == pet.applicant_id %>
-      <p>You are already approved!</p>
-      <%= link_to "Revoke Application for #{pet.name}", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %><br>
-    <% else %>
-      <%= link_to "Revoke Application for #{pet.name}", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %><br>
-      <p><%= pet.name %> is already pending adoption! No more adoption approvals can be made at this time.</p>
-    <% end %>
-
-  </section>
-<% end %><br>
+<h1><%= @application.name %></h1>
+<section class = "wrapper">
+  <p><%= @application.address %> <%= @application.city %>, <%= @application.state %> <%= @application.zip %></p>
+  <p><%= @application.phone_number %></p>
+  <h3><%= @application.description %></h3>
+  <% @application.pets.each do |pet| %>
+    <section id="pet-<%= pet.id %>">
+      <p><%= link_to pet.name, "/pets/#{pet.id}" %> -
+      <% if pet.adoptable? %>
+        <%= link_to "Approve Application", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %>
+      <% elsif pet.adoptable? == false && @application.id == pet.applicant_id %>
+        <%= link_to "Revoke Application", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %>
+        <p>You are already approved!</p>
+      <% else %>
+        <%= link_to "Revoke Application", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %>
+        <p><%= pet.name %> is already pending adoption! No more adoption approvals can be made at this time.</p>
+      <% end %></p>
+    </section>
+  <% end %>
+</section>

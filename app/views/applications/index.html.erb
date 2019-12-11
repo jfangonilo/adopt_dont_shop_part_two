@@ -1,5 +1,8 @@
-<% @applications.each do |application| %>
-  <section id="application-<%= application.id %>">
-    <%= link_to application.name, "/applications/#{application.id}" %>
-  </section>
-<% end %>
+<h1>Applications</h1>
+<section class = "wrapper">
+  <% @applications.each do |application| %>
+    <section id="application-<%= application.id %>">
+      <p><%= link_to application.name, "/applications/#{application.id}" %></p>
+    </section>
+  <% end %>
+</section>
