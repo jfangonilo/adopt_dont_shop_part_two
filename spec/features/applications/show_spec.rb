@@ -29,7 +29,7 @@ describe "applications show page" do
 
     visit "/applications/#{application_2.id}"
     within "#pet-#{pet_2.id}" do
-      click_link "Approve Application for #{pet_2.name}"
+      click_link "Approve Application"
     end
 
     expect(current_path).to eq "/pets/#{pet_2.id}"
