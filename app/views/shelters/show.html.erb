@@ -1,6 +1,8 @@
 <h1><%= link_to @shelter.name, "/shelters/#{@shelter.id}/pets" %></h1>
+
 <section class = "wrapper">
   <h2><%= @shelter.address %> <%= @shelter.city %>, <%= @shelter.state %> <%= @shelter.zip %></h2>
+
   <section id = "shelter">
     <p><%= link_to "Update", "/shelters/#{@shelter.id}/edit" %>
     <% if @shelter.pets_pending %>
@@ -8,8 +10,12 @@
     <% else %>
       <%= link_to "Delete", "/shelters/#{@shelter.id}", method: "delete" %></p>
     <% end %><br>
-  <h3><%= link_to "Add a Review", "/shelters/#{@shelter.id}/shelter_reviews/new" %></h3>
+    <section id = "shelteristatistics">
+
+    </section>
+    <h3><%= link_to "Add a Review", "/shelters/#{@shelter.id}/shelter_reviews/new" %></h3>
   </section>
+
   <% @shelter.shelter_reviews.each do |review| %>
     <section id="review-<%= review.id %>">
       <h3><%= review.title %> - <%= review.rating %>/5</h3>
