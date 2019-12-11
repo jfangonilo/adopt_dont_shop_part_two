@@ -29,11 +29,11 @@ class Pet < ApplicationRecord
   end
 
   def self.find_all_with_applications
-    Pet.select('pets.*').joins(:applications).distinct
+    joins(:applications).distinct
   end
 
   def self.all_with_pending_application
-
+    joins(:pet_applications).where("pet_applications.pending = true")
   end
 
   def applicant_name
