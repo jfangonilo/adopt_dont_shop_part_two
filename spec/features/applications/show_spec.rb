@@ -85,7 +85,7 @@ describe "applications show page" do
     end
 
     within "#pet-#{pet_2.id}" do
-      expect(page).to have_link("Approve Application for #{pet_2.name}")
+      expect(page).to have_link("Approve Application")
     end
   end
 
