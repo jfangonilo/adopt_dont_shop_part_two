@@ -19,4 +19,7 @@ class Shelter < ApplicationRecord
   def pets_pending
     pets.any? {|pet| !pet.adoptable }
   end
+
+  def total_pets
+  end
 end
