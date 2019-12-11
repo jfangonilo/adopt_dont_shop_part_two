@@ -74,7 +74,7 @@ describe "applications show page" do
 
     visit "/applications/#{application_1.id}"
     within "#pet-#{pet_1.id}" do
-      click_link "Approve Application for #{pet_1.name}"
+      click_link "Approve Application"
     end
 
     visit "/applications/#{application_2.id}"
