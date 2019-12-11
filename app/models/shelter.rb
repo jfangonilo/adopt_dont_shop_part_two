@@ -15,4 +15,8 @@ class Shelter < ApplicationRecord
   def self.alpha_sort
     order(name: :ASC)
   end
+
+  def pets_pending
+    pets.any? {|pet| !pet.adoptable }
+  end
 end
