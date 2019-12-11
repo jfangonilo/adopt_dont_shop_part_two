@@ -28,16 +28,20 @@ class Pet < ApplicationRecord
     order(adoptable: :DESC)
   end
 
+  def self.find_all_with_applications
+    Pet.select('pets.*').joins(:applications).distinct
+  end
+
+  def self.all_with_pending_application
+
+  end
+
   def applicant_name
     pet_applications.find_by(pending: true).application.name
   end
 
   def applicant_id
     pet_applications.find_by(pending: true).application.id
-  end
-
-  def self.find_all_with_applications
-    Pet.select('pets.*').joins(:applications).distinct
   end
 
   def pending_adoption?
