@@ -79,9 +79,14 @@ describe "applications show page" do
 
     visit "/applications/#{application_2.id}"
 
-    expect(page).not_to have_link("Approve Application for #{pet_1.name}")
-    expect(page).to have_link("Approve Application for #{pet_2.name}")
-    expect(page).to have_content("#{pet_1.name} is already pending adoption! No more adoption approvals can be made at this time.")
+    within "#pet-#{pet_1.id}" do
+      expect(page).not_to have_link("Approve Application")
+      expect(page).to have_content("#{pet_1.name} is already pending adoption! No more adoption approvals can be made at this time.")
+    end
+
+    within "#pet-#{pet_2.id}" do
+      expect(page).to have_link("Approve Application for #{pet_2.name}")
+    end
   end
 
   it "does not display already approved message on application for which approved" do
