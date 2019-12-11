@@ -6,7 +6,7 @@ RSpec.describe "As a visitor, when I visit a shelter show page" do
     click_link "Add a Review"
 
     expect(current_path).to eq("/shelters/#{shelter_1.id}/shelter_reviews/new")
-    expect(page).to have_content("Add a Review")
+    expect(page).to have_content("New Review")
 
     review_title = "Best shelter ever!"
     review_rating = 5
@@ -18,7 +18,7 @@ RSpec.describe "As a visitor, when I visit a shelter show page" do
     fill_in "Content", with: review_content
     fill_in "Picture", with: review_picture
     click_button "Submit Review"
-    
+
     expect(current_path).to eq("/shelters/#{shelter_1.id}")
     expect(page).to have_content(review_title)
     expect(page).to have_content(review_rating)
