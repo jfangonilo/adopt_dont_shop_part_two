@@ -27,4 +27,14 @@ describe "When I visit a pet creation page," do
     expect(page).to have_content approximate_age
     expect(page).to have_content sex
   end
+
+  it "flashes error messages for fields not filled in" do
+    click_button "Submit"
+
+    expect(page).to have_content "Image can't be blank"
+    expect(page).to have_content "Name can't be blank"
+    expect(page).to have_content "Description can't be blank"
+    expect(page).to have_content "Approximate age can't be blank"
+    expect(page).to have_content "Sex can't be blank"
+  end
 end
