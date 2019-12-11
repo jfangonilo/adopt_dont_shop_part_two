@@ -7,9 +7,14 @@ describe "applications show page" do
     app.pets << pets
 
     visit "/applications/#{app.id}"
-    click_link "Approve Application for #{pets[0].name}"
+    within "#pet-#{pets[0].id}" do
+      click_link "Approve Application"
+    end
+
     visit "/applications/#{app.id}"
-    click_link "Approve Application for #{pets[1].name}"
+    within "#pet-#{pets[1].id}" do
+      click_link "Approve Application"
+    end
   end
 
   it "allows you to approve a pet's application" do
@@ -24,7 +29,7 @@ describe "applications show page" do
 
     visit "/applications/#{application_2.id}"
     within "#pet-#{pet_2.id}" do
-      click_link "Approve Application for #{pet_2.name}"
+      click_link "Approve Application"
     end
 
     expect(current_path).to eq "/pets/#{pet_2.id}"
@@ -69,14 +74,19 @@ describe "applications show page" do
 
     visit "/applications/#{application_1.id}"
     within "#pet-#{pet_1.id}" do
-      click_link "Approve Application for #{pet_1.name}"
+      click_link "Approve Application"
     end
 
     visit "/applications/#{application_2.id}"
 
-    expect(page).not_to have_link("Approve Application for #{pet_1.name}")
-    expect(page).to have_link("Approve Application for #{pet_2.name}")
-    expect(page).to have_content("#{pet_1.name} is already pending adoption! No more adoption approvals can be made at this time.")
+    within "#pet-#{pet_1.id}" do
+      expect(page).not_to have_link("Approve Application")
+      expect(page).to have_content("#{pet_1.name} is already pending adoption! No more adoption approvals can be made at this time.")
+    end
+
+    within "#pet-#{pet_2.id}" do
+      expect(page).to have_link("Approve Application")
+    end
   end
 
   it "does not display already approved message on application for which approved" do
@@ -90,7 +100,7 @@ describe "applications show page" do
 
     visit "/applications/#{application_1.id}"
     within "#pet-#{pet_1.id}" do
-      click_link "Approve Application for #{pet_1.name}"
+      click_link "Approve Application"
     end
 
     visit "/applications/#{application_1.id}"
@@ -105,17 +115,17 @@ describe "applications show page" do
     app.pets << pet
 
     visit "/applications/#{app.id}"
-    click_link "Approve Application for #{pet.name}"
+    click_link "Approve Application"
 
     within "#adoptable-status" do
       expect(page).to have_content "Adoption Pending"
     end
 
     visit "/applications/#{app.id}"
-    click_link "Revoke Application for #{pet.name}"
+    click_link "Revoke Application"
 
     expect(current_path).to eq "/applications/#{app.id}"
-    expect(page).to have_link "Approve Application for #{pet.name}"
+    expect(page).to have_link "Approve Application"
 
     visit "/pets/#{pet.id}"
     within "#adoptable-status" do
@@ -123,7 +133,7 @@ describe "applications show page" do
     end
 
     visit "/applications/#{app.id}"
-    click_link "Approve Application for #{pet.name}"
+    click_link "Approve Application"
 
     within "#adoptable-status" do
       expect(page).to have_content "Adoption Pending"
