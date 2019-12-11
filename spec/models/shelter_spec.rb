@@ -36,14 +36,6 @@ describe Shelter, type: :model do
       expect(shelter.pets_pending).to eq(true)
     end
 
-    it ".total_pets" do
-      shelter = create(:random_shelter)
-      pets = create_list(:random_pet, 3, shelter: shelter)
-
-      expect(shelter.total_pets).to eq(3)
-    end
-  end
-
   describe "class method" do
     it ".alpha_sort" do
       expect(Shelter.all).to match_array [@shelter_1, @shelter_2]
