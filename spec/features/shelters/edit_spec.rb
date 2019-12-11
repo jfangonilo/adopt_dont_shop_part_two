@@ -35,6 +35,10 @@ describe "As a visitor, when I visit /shelters/:id/edit," do
     click_button "Update"
 
     expect(current_path).to eq("/shelters/#{@shelter_1.id}/edit")
-    expect(page).to have_content("Please fill out all fields!")
+    expect(page).to have_content("Name can't be blank")
+    expect(page).to have_content("Address can't be blank")
+    expect(page).to have_content("City can't be blank")
+    expect(page).to have_content("State can't be blank")
+    expect(page).to have_content("Zip can't be blank")
   end
 end
