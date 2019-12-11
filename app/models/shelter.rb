@@ -5,7 +5,7 @@ class Shelter < ApplicationRecord
   validates_presence_of :state
   validates_presence_of :zip
 
-  has_many :pets
+  has_many :pets, dependent: :destroy
   has_many :shelter_reviews
 
   def pet_count
@@ -14,5 +14,9 @@ class Shelter < ApplicationRecord
 
   def self.alpha_sort
     order(name: :ASC)
+  end
+
+  def pets_pending
+    pets.any? {|pet| !pet.adoptable }
   end
 end

@@ -107,5 +107,7 @@ describe Pet, type: :model do
       expect(Pet.find_all_with_applications.include?(pet_1)).to eq(true)
       expect(Pet.find_all_with_applications.include?(pet_2)).to eq(true)
     end
+
+
   end
 end

@@ -114,4 +114,47 @@ describe "As a visitor, when I visit /shelters/:id," do
     expect(page).not_to have_content(@reviews[0].content)
     expect(page).not_to have_content(@reviews[0].picture)
   end
+
+  it "cannot delete shelter if any pets have approved applications" do
+    shelter_1 = create(:random_shelter)
+    pet_1 = create(:random_pet, shelter: shelter_1)
+    pet_2 = create(:random_pet, shelter: shelter_1)
+    application = create(:application)
+    application.pets << [pet_1, pet_2]
+
+    visit "/applications/#{application.id}"
+    click_link "Approve Application for #{pet_1.name}"
+
+    visit "/shelters"
+    within "#shelter-#{shelter_1.id}" do
+      expect(page).not_to have_content('Delete')
+      expect(page).to have_content("Cannot delete #{shelter_1.name}, pets pending adoption.")
+    end
+
+    visit "/shelters/#{shelter_1.id}"
+    within "#shelter" do
+      expect(page).not_to have_content('Delete')
+      expect(page).to have_content("Cannot delete #{shelter_1.name}, pets pending adoption.")
+    end
+  end
+
+  it "can delete shelter with pets if no pets have approved applications" do
+    shelter = create(:random_shelter)
+    pet = create(:random_pet)
+    application = create(:application)
+    application.pets << pet
+
+    visit '/shelters'
+
+    within "#shelter-#{shelter.id}" do
+      click_link "Delete"
+    end
+
+    expect(current_path).to eq('/shelters')
+    expect(page).not_to have_content(shelter.name)
+    expect(page).not_to have_content(shelter.address)
+    expect(page).not_to have_content(shelter.city)
+    expect(page).not_to have_content(shelter.state)
+    expect(page).not_to have_content(shelter.zip)
+  end
 end

@@ -26,6 +26,15 @@ describe Shelter, type: :model do
     it ".pet_count" do
       expect(@shelter_1.pet_count).to eq 2
     end
+
+    it ".pets_pending" do
+      shelter = create(:random_shelter)
+      pet = create(:random_pet, shelter: shelter)
+      expect(shelter.pets_pending).to eq(false)
+
+      shelter.pets.first.adoptable = false
+      expect(shelter.pets_pending).to eq(true)
+    end
   end
 
   describe "class method" do
