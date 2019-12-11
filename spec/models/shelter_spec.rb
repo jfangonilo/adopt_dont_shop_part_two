@@ -28,13 +28,17 @@ describe Shelter, type: :model do
     end
 
     it ".pets_pending" do
-      shelter = create(:random_shelter)
-      pet = create(:random_pet, shelter: shelter)
-      expect(shelter.pets_pending).to eq(false)
+      shelter_1 = create(:random_shelter)
+      pet_1 = create(:random_pet, shelter: shelter_1)
 
-      shelter.pets.first.adoptable = false
-      expect(shelter.pets_pending).to eq(true)
+      shelter_2 = create(:random_shelter)
+      pet_2 = create(:random_pet, adoptable: false, shelter: shelter_2)
+
+      expect(shelter_1.pets_pending).to eq(false)
+
+      expect(shelter_2.pets_pending).to eq(true)
     end
+  end
 
   describe "class method" do
     it ".alpha_sort" do
