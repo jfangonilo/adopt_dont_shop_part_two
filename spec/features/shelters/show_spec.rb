@@ -173,4 +173,18 @@ describe "As a visitor, when I visit /shelters/:id," do
       expect(page).to have_content("Count of Pets: 3")
     end
   end
+
+  it "displays average review rating" do
+    shelter = create(:random_shelter)
+    review_1 = create(:random_shelter_review, rating: 1, shelter: shelter)
+    review_2 = create(:random_shelter_review, rating: 4, shelter: shelter)
+    review_3 = create(:random_shelter_review, rating: 5, shelter: shelter)
+
+    visit "/shelters/#{shelter.id}"
+    
+    within "#shelter-statistics" do
+      expect(page).to have_content("Average Review Rating: 3.33")
+      expect(page).not_to have_content("Average Review Rating: 3.333")
+    end
+  end
 end
