@@ -26,6 +26,8 @@ describe Shelter, type: :model do
     it ".pet_count" do
       expect(@shelter_1.pet_count).to eq 2
     end
+
+    
   end
 
   describe "class method" do

@@ -96,5 +96,7 @@ describe Pet, type: :model do
 
       expect(Pet.find_all_with_applications).to eq([pet_1, pet_2])
     end
+
+
   end
 end
