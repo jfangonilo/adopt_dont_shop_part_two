@@ -7,9 +7,14 @@ describe "applications show page" do
     app.pets << pets
 
     visit "/applications/#{app.id}"
-    click_link "Approve Application for #{pets[0].name}"
+    within "#pet-#{pets[0].id}" do
+      click_link "Approve Application"
+    end
+
     visit "/applications/#{app.id}"
-    click_link "Approve Application for #{pets[1].name}"
+    within "#pet-#{pets[1].id}" do
+      click_link "Approve Application"
+    end
   end
 
   it "allows you to approve a pet's application" do
