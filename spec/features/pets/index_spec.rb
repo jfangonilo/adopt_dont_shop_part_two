@@ -6,7 +6,7 @@ describe "As a user, when I visit the pet index page," do
 
     @pet_1 = create(:random_pet, shelter: shelters[0])
     @pet_2 = create(:random_pet, shelter: shelters[1])
-    
+
     visit "/pets"
   end
 
@@ -18,7 +18,7 @@ describe "As a user, when I visit the pet index page," do
       expect(page).to have_content @pet_1.sex
       expect(page).to have_content @pet_1.shelter.name
     end
-    
+
     within "#pet-#{@pet_2.id}" do
       expect(page).to have_css "img[src = '#{@pet_2.image}']"
       expect(page).to have_content @pet_2.name
@@ -77,7 +77,7 @@ describe "As a user, when I visit the pet index page," do
     visit "pets/#{@pet_1.id}/applications"
 
     click_link "test name"
-    click_link "Approve Application for #{@pet_1.name}"
+    click_link "Approve Application"
 
     visit "/pets"
     expect(page.body.index(@pet_2.name)).to be < page.body.index(@pet_1.name)
