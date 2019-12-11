@@ -160,4 +160,17 @@ describe "As a visitor, when I visit /shelters/:id," do
     expect(page).not_to have_content(shelter.state)
     expect(page).not_to have_content(shelter.zip)
   end
+
+  it "displays count of pets at shelter" do
+    shelter = create(:random_shelter)
+    pet_1 = create(:random_pet, shelter: shelter)
+    pet_2 = create(:random_pet, shelter: shelter)
+    pet_3 = create(:random_pet, shelter: shelter)
+
+    visit "/shelters/#{shelter.id}"
+
+    within "#shelter-statistics" do
+      expect(page).to have_content("Count of Pets: 3")
+    end
+  end
 end
