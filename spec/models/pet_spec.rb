@@ -108,6 +108,18 @@ describe Pet, type: :model do
       expect(Pet.find_all_with_applications.include?(pet_2)).to eq(true)
     end
 
+    it ".all_with_pending_application" do
+      pets = create_list(:random_pet, 3)
+      app = create(:application)
+      app.pets << [pets[0], pets[1]]
+      pets[0].update(adoptable: false)
+      pets[1].update(adoptable: false)
+      pets[0].pet_applications.first.update(pending: true)
+      pets[1].pet_applications.first.update(pending: true)
 
+      expect(Pet.all_with_pending_application).to include pets[0]
+      expect(Pet.all_with_pending_application).to include pets[1]
+      expect(Pet.all_with_pending_application).not_to include pets[2]
+    end
   end
 end
