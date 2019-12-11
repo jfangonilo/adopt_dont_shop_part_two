@@ -42,10 +42,10 @@ describe Shelter, type: :model do
     it ".average_rating" do
       shelter = create(:random_shelter)
       review_1 = create(:random_shelter_review, rating: 1, shelter: shelter)
-      review_2 = create(:random_shelter_review, rating: 4, shelter: shelter)
+      review_2 = create(:random_shelter_review, rating: 3, shelter: shelter)
       review_3 = create(:random_shelter_review, rating: 5, shelter: shelter)
 
-      expect(shelter.average_rating).to eq(3.33)
+      expect(shelter.average_rating).to eq(3)
     end
   end
 
