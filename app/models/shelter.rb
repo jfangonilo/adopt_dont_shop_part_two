@@ -21,5 +21,6 @@ class Shelter < ApplicationRecord
   end
 
   def average_rating
+    shelter_reviews.average(:rating)
   end
 end
