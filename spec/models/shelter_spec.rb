@@ -47,6 +47,22 @@ describe Shelter, type: :model do
 
       expect(shelter.average_rating).to eq(3)
     end
+
+    it ".applications_count" do
+      shelter = create(:random_shelter)
+      pet_1 = create(:random_pet, shelter: shelter)
+      pet_2 = create(:random_pet, shelter: shelter)
+      application_1 = create(:application)
+      application_2 = create(:application)
+      application_3 = create(:application)
+
+      application_1.pets << pet_1
+      application_1.pets << pet_2
+      application_2.pets << pet_1
+      application_3.pets << pet_1
+
+      expect(shelter.applications_count).to eq(3)
+    end
   end
 
   describe "class method" do
