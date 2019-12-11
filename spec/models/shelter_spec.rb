@@ -35,8 +35,6 @@ describe Shelter, type: :model do
       shelter.pets.first.adoptable = false
       expect(shelter.pets_pending).to eq(true)
     end
-
-
   end
 
   describe "class method" do
