@@ -1,7 +1,4 @@
 <h1>Favorites</h1>
-<% unless favorites.empty? %>
-  <%= button_to "Start Adoption Application", '/applications/new', method: :get %>
-<% end %>
 <section class = "wrapper">
 <h3><%= link_to "Remove All Favorites", "/favorites", method: :delete %></h3>
   <section id = "favorites">
@@ -13,6 +10,9 @@
     </section>
     <% end %>
   </section>
+  <% unless favorites.empty? %>
+    <%= button_to "Start Adoption Application", '/applications/new', method: :get %>
+  <% end %>
   <section id = "favorites-list">
     <h2>All Pets with Applications</h2>
     <p><% @pets_with_apps.each do |pet| %>
