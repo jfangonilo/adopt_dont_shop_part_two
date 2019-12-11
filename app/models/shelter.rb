@@ -19,4 +19,7 @@ class Shelter < ApplicationRecord
   def pets_pending
     pets.where(adoptable: false).any?
   end
+
+  def average_rating
+  end
 end
