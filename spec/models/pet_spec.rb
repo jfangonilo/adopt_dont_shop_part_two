@@ -77,6 +77,14 @@ describe Pet, type: :model do
 
       expect(@pet_1.applicant_id).to eq(application_1.id)
     end
+
+    it ".pending_adoption?" do
+      app = create(:application)
+      app.pets << @pet_1
+      app.pet_applications.first.update(pending: true)
+
+      expect(@pet_1.pending_adoption?).to eq true
+    end
   end
 
   describe "class method" do
@@ -89,12 +97,15 @@ describe Pet, type: :model do
     it ".find_all_with_applications" do
       pet_1 = create(:random_pet)
       pet_2 = create(:random_pet)
-      pet_3 = create(:random_pet)
-      application = create(:application)
+      application_1 = create(:application)
+      application_2 = create(:application)
 
-      application.pets << [pet_1, pet_2]
+      application_1.pets << [pet_1, pet_2]
+      application_2.pets << [pet_1, pet_2]
 
-      expect(Pet.find_all_with_applications).to eq([pet_1, pet_2])
+      expect(Pet.find_all_with_applications.length).to eq(2)
+      expect(Pet.find_all_with_applications.include?(pet_1)).to eq(true)
+      expect(Pet.find_all_with_applications.include?(pet_2)).to eq(true)
     end
 
 
