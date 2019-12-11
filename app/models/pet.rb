@@ -9,7 +9,7 @@ class Pet < ApplicationRecord
   validates_numericality_of :approximate_age
 
   belongs_to :shelter
-  has_many :pet_applications
+  has_many :pet_applications, dependent: :destroy
   has_many :applications, through: :pet_applications
 
   def shelter_name
@@ -38,5 +38,9 @@ class Pet < ApplicationRecord
 
   def self.find_all_with_applications
     Pet.select('pets.*').joins(:applications).distinct
+  end
+
+  def pending_adoption?
+    true if pet_applications.find_by(pending: :true)
   end
 end
