@@ -16,8 +16,8 @@ class SheltersController < ApplicationController
       redirect_to '/shelters'
     else
       redirect_to '/shelters/new'
-      flash[:notice] = "Please fill out all fields!"
     end
+    flash[:error] = shelter.errors.full_messages.to_sentence
   end
 
   def edit
@@ -31,8 +31,8 @@ class SheltersController < ApplicationController
       redirect_to "/shelters/#{shelter.id}"
     else
       redirect_to "/shelters/#{shelter.id}/edit"
-      flash[:notice] = "Please fill out all fields!"
     end
+    flash[:error] = shelter.errors.full_messages.to_sentence
   end
 
   def destroy

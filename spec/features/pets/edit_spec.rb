@@ -32,4 +32,13 @@ describe "As a visitor, when I go to /pet/:id/edit," do
     expect(page).not_to have_content @pet.name
     expect(page).not_to have_content @pet.description
   end
+
+  it "flashes error messages for fields not filled in" do
+    click_button "Update"
+
+    expect(page).to have_content "Image can't be blank"
+    expect(page).to have_content "Name can't be blank"
+    expect(page).to have_content "Description can't be blank"
+    expect(page).to have_content "Approximate age can't be blank"
+  end
 end
