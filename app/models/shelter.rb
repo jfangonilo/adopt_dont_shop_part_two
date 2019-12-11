@@ -21,5 +21,6 @@ class Shelter < ApplicationRecord
   end
 
   def total_pets
+    pets.length
   end
 end
