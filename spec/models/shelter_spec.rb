@@ -34,9 +34,9 @@ describe Shelter, type: :model do
       shelter_2 = create(:random_shelter)
       pet_2 = create(:random_pet, adoptable: false, shelter: shelter_2)
 
-      expect(shelter_1.pets_pending).to eq(false)
+      expect(shelter_1.pets_pending?).to eq(false)
 
-      expect(shelter_2.pets_pending).to eq(true)
+      expect(shelter_2.pets_pending?).to eq(true)
     end
 
     it ".average_rating" do
