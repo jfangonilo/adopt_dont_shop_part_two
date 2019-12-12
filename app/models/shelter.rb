@@ -25,5 +25,6 @@ class Shelter < ApplicationRecord
   end
 
   def applications_count
+    Application.joins(:pet_applications).joins(:pets).where("pets.shelter_id = #{self.id}").distinct.length
   end
 end
