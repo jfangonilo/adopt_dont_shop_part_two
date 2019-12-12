@@ -52,14 +52,16 @@ describe Shelter, type: :model do
       shelter_1 = create(:random_shelter)
       shelter_2 = create(:random_shelter)
       pet_1 = create(:random_pet, shelter: shelter_1)
-      pet_2 = create(:random_pet, shelter: shelter_2)
+      pet_2 = create(:random_pet, shelter: shelter_1)
+      pet_3 = create(:random_pet, shelter: shelter_2)
       application_1 = create(:application)
       application_2 = create(:application)
       application_3 = create(:application)
 
       application_1.pets << pet_1
-      application_2.pets << pet_2
-      application_3.pets << pet_1
+      application_1.pets << pet_2
+      application_2.pets << pet_1
+      application_3.pets << pet_3
 
       expect(shelter_1.applications_count).to eq(2)
     end
