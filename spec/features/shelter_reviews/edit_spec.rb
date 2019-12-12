@@ -13,7 +13,7 @@ describe "shelter edit page" do
     picture = "http://lorempixel.com/400/300/cats/10/"
 
     fill_in "title",    with: title
-    fill_in "rating",   with: rating
+    select rating,    :from => 'rating'
     fill_in "content",  with: content
     fill_in "picture",  with: picture
     click_button "Update"
@@ -23,7 +23,7 @@ describe "shelter edit page" do
     expect(page).to have_content title
     expect(page).to have_content content
     expect(page).to have_css "img[src = '#{picture}']"
-    
+
     expect(page).not_to have_content @review.title
     expect(page).not_to have_content @review.content
     expect(page).not_to have_css "img[src = '#{@review.picture}']"
