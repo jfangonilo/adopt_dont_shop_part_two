@@ -33,7 +33,7 @@ describe Pet, type: :model do
     it {should validate_presence_of :approximate_age}
     it {should validate_presence_of :sex}
     it {should validate_presence_of :description}
-    it {should validate_presence_of :adoptable}
+    # it {should validate_inclusion_of(:adoptable).in_array([true, false])}
 
     it {should validate_numericality_of :approximate_age}
   end

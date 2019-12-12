@@ -160,4 +160,51 @@ describe "As a visitor, when I visit /shelters/:id," do
     expect(page).not_to have_content(shelter.state)
     expect(page).not_to have_content(shelter.zip)
   end
+
+  it "displays count of pets at shelter" do
+    shelter = create(:random_shelter)
+    pet_1 = create(:random_pet, shelter: shelter)
+    pet_2 = create(:random_pet, shelter: shelter)
+    pet_3 = create(:random_pet, shelter: shelter)
+
+    visit "/shelters/#{shelter.id}"
+
+    within "#shelter-statistics" do
+      expect(page).to have_content("Count of Pets: 3")
+    end
+  end
+
+  it "displays average review rating" do
+    shelter = create(:random_shelter)
+    review_1 = create(:random_shelter_review, rating: 1, shelter: shelter)
+    review_2 = create(:random_shelter_review, rating: 4, shelter: shelter)
+    review_3 = create(:random_shelter_review, rating: 5, shelter: shelter)
+
+    visit "/shelters/#{shelter.id}"
+
+    within "#shelter-statistics" do
+      expect(page).to have_content("Average Review Rating: 3.33")
+      # expect(page).not_to have_content("Average Review Rating: 3.333")
+    end
+  end
+
+  it "displays number of applications open for shelter" do
+    shelter = create(:random_shelter)
+    pet_1 = create(:random_pet, shelter: shelter)
+    pet_2 = create(:random_pet, shelter: shelter)
+    application_1 = create(:application)
+    application_2 = create(:application)
+    application_3 = create(:application)
+
+    application_1.pets << pet_1
+    application_1.pets << pet_2
+    application_2.pets << pet_1
+    application_3.pets << pet_1
+
+    visit "/shelters/#{shelter.id}"
+
+    within "#shelter-statistics" do
+      expect(page).to have_content("Number of Applications Open: 3")
+    end
+  end
 end

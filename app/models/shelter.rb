@@ -17,6 +17,14 @@ class Shelter < ApplicationRecord
   end
 
   def pets_pending
-    pets.any? {|pet| !pet.adoptable }
+    pets.where(adoptable: false).any?
+  end
+
+  def average_rating
+    shelter_reviews.average(:rating)
+  end
+
+  def applications_count
+    Application.joins(:pet_applications).joins(:pets).where("pets.shelter_id = #{self.id}").distinct.length
   end
 end
