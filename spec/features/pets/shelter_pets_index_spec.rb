@@ -39,6 +39,8 @@ describe "As a user, when I visit the /shelters/:shelter_id/pets page," do
   end
 
   it "I can see a count of pets at the shelter" do
-    expect(page).to have_content "2 Pets at #{@shelter_1.name}"
+    within "#pet-count" do
+      expect(page).to have_content "2 Pets"
+    end
   end
 end

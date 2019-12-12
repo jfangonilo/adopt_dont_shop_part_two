@@ -32,7 +32,7 @@ class ApplicationsController < ApplicationController
       flash.now[:notice] = "Show this one some love! No one has applied yet!"
     end
   end
-  
+
   def show
     @application = Application.find(params[:id])
   end
@@ -43,7 +43,7 @@ private
   end
 
   def require_pets
-    if params[:pets_applied_for].nil?
+    unless params[:pets_applied_for]
       flash[:notice] = "Please fill out all fields!"
       redirect_to "/applications/new"
     end

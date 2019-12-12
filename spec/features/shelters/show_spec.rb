@@ -49,7 +49,7 @@ describe "As a visitor, when I visit /shelters/:id," do
     review_picture = "https://images.unsplash.com/photo-1506917728037-b6af01a7d403?ixlib=rb-1.2.1&auto=format&fit=crop&w=1934&q=80"
 
     fill_in "Title", with: review_title
-    fill_in "Rating", with: review_rating
+    select review_rating, :from => 'rating'
     fill_in "Content", with: review_content
     fill_in "Picture", with: review_picture
 
