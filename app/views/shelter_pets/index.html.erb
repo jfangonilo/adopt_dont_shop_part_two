@@ -1,5 +1,8 @@
-<h1><%= @shelter.pet_count %> Pets at <%= @shelter.name %></h1>
+<h1><%=link_to @shelter.name, "/shelters/#{@shelter.id}" %></h1>
 <section class ="wrapper">
+  <section id="pet-count">
+    <h2><%= @shelter.pet_count %> Pets</h2>
+  </section>
   <h3><%= link_to "Add Pet", "/shelters/#{@shelter.id}/pets/new" %></h3><br>
   <% @shelter.pets.each do |pet| %>
     <section id="pet-<%= pet.id %>">
