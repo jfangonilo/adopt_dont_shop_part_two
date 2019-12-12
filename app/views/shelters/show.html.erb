@@ -13,7 +13,7 @@
     <section id = "shelter-statistics">
       <h3>Count of Pets: <%= @shelter.pet_count %></h3>
       <h3>Average Review Rating: <%= @shelter.average_rating %></h3>
-      <h3>Number of Applications Open</h3>
+      <h3>Number of Applications Open: <%= @shelter.applications_count %></h3>
 
     </section>
     <h3><%= link_to "Add a Review", "/shelters/#{@shelter.id}/shelter_reviews/new" %></h3>
