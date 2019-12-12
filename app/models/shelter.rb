@@ -16,7 +16,7 @@ class Shelter < ApplicationRecord
     order(name: :ASC)
   end
 
-  def pets_pending
+  def pets_pending?
     pets.where(adoptable: false).any?
   end
 
@@ -25,6 +25,6 @@ class Shelter < ApplicationRecord
   end
 
   def applications_count
-    Application.joins(:pet_applications).joins(:pets).where("pets.shelter_id = #{self.id}").distinct.length
+    pets.joins(:applications).select(:application_id).distinct.length
   end
 end
