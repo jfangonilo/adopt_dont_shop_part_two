@@ -1,4 +1,4 @@
-class ShelterReviewsController < ApplicationController
+class ReviewsController < ApplicationController
   def new
     @shelter_id = params[:shelter_id]
   end
@@ -6,8 +6,8 @@ class ShelterReviewsController < ApplicationController
   def create
     @shelter_id = params[:shelter_id]
     shelter = Shelter.find(params[:shelter_id])
-    shelter_review = shelter.shelter_reviews.new(shelter_review_params)
-    if shelter_review.save
+    review = shelter.reviews.new(review_params)
+    if review.save
       redirect_to "/shelters/#{shelter.id}"
     else
       flash.now[:notice] = "Please fill out all fields"
@@ -16,16 +16,16 @@ class ShelterReviewsController < ApplicationController
   end
 
   def edit
-    @shelter_review = ShelterReview.find(params[:shelter_review_id])
+    @review = Review.find(params[:id])
   end
 
   def update
-    review = ShelterReview.find(params[:shelter_review_id])
-    review.update(shelter_review_params)
+    review = Review.find(params[:id])
+    review.update(review_params)
     if review.save
       redirect_to "/shelters/#{review.shelter_id}"
     else
-      @shelter_review = ShelterReview.find(params[:shelter_review_id])
+      @review = Review.find(params[:id])
       flash.now[:notice] = "Please fill out all fields"
       render :edit
     end
@@ -33,12 +33,12 @@ class ShelterReviewsController < ApplicationController
 
   def destroy
     shelter_id = params[:shelter_id]
-    ShelterReview.destroy(params[:shelter_review_id])
+    Review.destroy(params[:id])
     redirect_to "/shelters/#{shelter_id}"
   end
 
   private
-    def shelter_review_params
+    def review_params
       params.permit(:title, :rating, :content, :picture)
     end
 end

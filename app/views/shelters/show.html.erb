@@ -13,15 +13,15 @@
       <h4>Average Review Rating: <%= @shelter.average_rating.round(2) %></h4>
       <h4>Number of Applications Open: <%= @shelter.applications_count %></h4>
     </section>
-    <h3><%= link_to "Add a Review", "/shelters/#{@shelter.id}/shelter_reviews/new" %></h3>
+    <h3><%= link_to "Add a Review", "/shelters/#{@shelter.id}/reviews/new" %></h3>
   </section>
-  <% @shelter.shelter_reviews.each do |review| %>
+  <% @shelter.reviews.each do |review| %>
     <section id="review-<%= review.id %>">
       <h3><%= review.title %> - <%= review.rating %>/5</h3>
       <p><%= review.content %></p>
       <%= image_tag review.picture %><br>
-      <p><%= link_to "Edit Review", "/shelters/#{@shelter.id}/shelter_reviews/#{review.id}/edit" %>
-      <%= link_to "Delete Review", "/shelters/#{@shelter.id}/shelter_reviews/#{review.id}", method: :delete %></p><br>
+      <p><%= link_to "Edit Review", "/shelters/#{@shelter.id}/reviews/#{review.id}/edit" %>
+      <%= link_to "Delete Review", "/shelters/#{@shelter.id}/reviews/#{review.id}", method: :delete %></p><br>
     </section>
   <% end %>
 </section>
