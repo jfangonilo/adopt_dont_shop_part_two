@@ -15,13 +15,13 @@
   <% end %>
   <section id = "favorites-list">
     <h2>All Pets with Applications</h2>
-    <p><% @pets_with_apps.each do |pet| %>
+    <p><% @pets_applied_for.each do |pet| %>
       <%= link_to pet.name, "/pets/#{pet.id}" %>
     <% end %></p>
   </section>
   <section id = "approved-applications">
     <h2>Pending Approval</h2>
-    <% Pet.all_with_pending_application.each do |pet| %>
+    <% @pets_pending.each do |pet| %>
       <%= link_to pet.name, "/pets/#{pet.id}" %>
     <% end %>
   </section><br>
