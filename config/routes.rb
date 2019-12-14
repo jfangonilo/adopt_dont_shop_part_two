@@ -17,9 +17,9 @@ Rails.application.routes.draw do
   get 'shelters/:shelter_id/pets/new', to: 'pets#new'
   post 'shelters/:shelter_id/pets/', to: 'pets#create'
   delete '/pets/:id', to: 'pets#destroy'
-  
+
   get 'shelters/:shelter_id/pets', to: 'shelter_pets#index'
-  
+
   get '/shelters/:shelter_id/shelter_reviews/new', to: 'shelter_reviews#new'
   patch '/shelters/:shelter_id/shelter_reviews/:shelter_review_id', to: 'shelter_reviews#update'
   post '/shelters/:shelter_id/shelter_reviews', to: 'shelter_reviews#create'
@@ -29,13 +29,12 @@ Rails.application.routes.draw do
   get '/favorites', to: 'favorites#index'
   get '/favorites/:pet_id', to: 'favorites#show'
   patch '/favorites/:pet_id', to: 'favorites#update'
-  delete '/favorites/:pet_id', to: 'favorites#destroy'
-  delete '/favorites', to: 'favorites#reset'
+  delete '/favorites', to: 'favorites#destroy'
 
   get '/applications/new', to: 'applications#new'
   post '/applications', to: 'applications#create'
   get '/pets/:pet_id/applications', to: 'applications#index'
   get '/applications/:id', to: 'applications#show'
-  
+
   patch '/pets/:pet_id/applications/:application_id', to: 'pet_applications#update'
 end
