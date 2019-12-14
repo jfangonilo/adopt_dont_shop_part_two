@@ -1,27 +1,27 @@
 class Favorites
-  attr_reader :contents
+  attr_reader :pets
 
-  def initialize(initial_contents = [])
-    @contents = initial_contents
+  def initialize(pets = [])
+    @pets = pets
   end
 
   def is_included?(id)
-    contents.include? id
+    pets.include? id
   end
 
   def add_pet(id)
-    contents << id
+    pets << id
   end
 
   def total_count
-    contents.length
+    pets.length
   end
 
   def delete_pets(ids)
-    ids.each { |id| contents.delete(id.to_i) }
+    ids.each { |id| pets.delete(id.to_i) }
   end
 
   def empty?
-    @contents == []
+    pets == []
   end
 end
