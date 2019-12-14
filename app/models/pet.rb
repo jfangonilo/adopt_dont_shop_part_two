@@ -28,7 +28,7 @@ class Pet < ApplicationRecord
     order(adoptable: :DESC)
   end
 
-  def self.find_all_with_applications
+  def self.all_with_applications
     joins(:applications).distinct
   end
 
