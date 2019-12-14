@@ -7,7 +7,7 @@ RSpec.describe Favorites do
       list = Favorites.new
       list.add_pet(1)
 
-      expect(list.contents).to eq([1])
+      expect(list.pets).to eq([1])
     end
   end
 
@@ -25,12 +25,12 @@ RSpec.describe Favorites do
       list.add_pet(1)
       list.delete_pets([1])
 
-      expect(list.contents).to eq([])
+      expect(list.pets).to eq([])
 
       list.add_pet(1)
       list.add_pet(2)
       list.delete_pets([1,2])
-      expect(list.contents).to eq([])
+      expect(list.pets).to eq([])
     end
   end
 
