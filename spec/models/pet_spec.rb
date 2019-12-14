@@ -85,6 +85,13 @@ describe Pet, type: :model do
 
       expect(@pet_1.pending_adoption?).to eq true
     end
+
+    it ".find_application" do
+      app = create(:application)
+      app.pets << @pet_1
+
+      expect(@pet_1.find_application(app.id)).to eq app.pet_applications.first
+    end
   end
 
   describe "class method" do
