@@ -101,7 +101,7 @@ describe Pet, type: :model do
       expect(Pet.sort_adoptable).to match_array [@pet_2, @pet_1]
     end
 
-    it ".find_all_with_applications" do
+    it ".all_with_applications" do
       pet_1 = create(:random_pet)
       pet_2 = create(:random_pet)
       application_1 = create(:application)
@@ -110,9 +110,9 @@ describe Pet, type: :model do
       application_1.pets << [pet_1, pet_2]
       application_2.pets << [pet_1, pet_2]
 
-      expect(Pet.find_all_with_applications.length).to eq(2)
-      expect(Pet.find_all_with_applications.include?(pet_1)).to eq(true)
-      expect(Pet.find_all_with_applications.include?(pet_2)).to eq(true)
+      expect(Pet.all_with_applications.length).to eq(2)
+      expect(Pet.all_with_applications.include?(pet_1)).to eq(true)
+      expect(Pet.all_with_applications.include?(pet_2)).to eq(true)
     end
 
     it ".all_with_pending_application" do
