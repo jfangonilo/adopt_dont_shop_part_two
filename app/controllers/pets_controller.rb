@@ -25,7 +25,6 @@ class PetsController < ApplicationController
   def update
     pet = Pet.find(params[:id])
     pet.update(pet_params)
-    pet.save
     redirect_to "/pets/#{pet.id}"
     flash[:error] = pet.errors.full_messages.to_sentence
   end
