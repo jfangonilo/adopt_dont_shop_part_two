@@ -1,15 +1,15 @@
 class PetApplicationsController < ApplicationController
   def update
-    pet_id = params[:pet_id]
-    app_id = params[:application_id]
-    pet = Pet.find(pet_id)
+    pet = Pet.find(params[:pet_id])
     pet.toggle_adoptable
-    pet_app = pet.find_application(app_id)
+
+    pet_app = pet.find_application(params[:application_id])
     pet_app.toggle_pending
+
     if pet.adoptable?
-      redirect_to "/applications/#{app_id}"
+      redirect_to "/applications/#{pet_app.application_id}"
     else
-      redirect_to "/pets/#{pet_id}"
+      redirect_to "/pets/#{pet.id}"
     end
   end
 end
