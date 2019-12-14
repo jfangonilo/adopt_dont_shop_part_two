@@ -6,11 +6,11 @@
     <section id = "favorite-<%= pet.id %>">
       <h2><%= pet.name %></h2>
       <p><%= image_tag pet.image %></p>
-      <%= button_to "Remove #{pet.name} from Favorites", "/favorites/#{pet.id}", method: :delete %>
+      <%= button_to "Remove #{pet.name} from Favorites", "/favorites/#{pet.id}", method: :patch %>
     </section>
     <% end %>
   </section>
-  <% unless favorites.empty? %>
+  <% if !favorites.empty? %>
     <%= button_to "Start Adoption Application", '/applications/new', method: :get %>
   <% end %>
   <section id = "favorites-list">

@@ -1,7 +1,7 @@
-<h1>Update Shelter</h1>
+<h1><%= link_to @shelter.name, "/shelters/#{@shelter.id}" %></h1>
 <section class = "wrapper">
   <%= render partial: 'form', locals: {
-    path: "/shelters/#{@shelter_id}",
+    path: "/shelters/#{@shelter.id}",
     method: :patch,
     button_text: "Update"} %>
 </section>
