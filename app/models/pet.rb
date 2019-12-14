@@ -47,4 +47,8 @@ class Pet < ApplicationRecord
   def pending_adoption?
     true if pet_applications.find_by(pending: :true)
   end
+
+  def find_application(id)
+    pet_applications.find_by(application_id: id)
+  end
 end
