@@ -1,5 +1,4 @@
 class ShelterReviewsController < ApplicationController
-
   def new
     @shelter_id = params[:shelter_id]
   end
@@ -8,7 +7,6 @@ class ShelterReviewsController < ApplicationController
     @shelter_id = params[:shelter_id]
     shelter = Shelter.find(params[:shelter_id])
     shelter_review = shelter.shelter_reviews.new(shelter_review_params)
-
     if shelter_review.save
       redirect_to "/shelters/#{shelter.id}"
     else
@@ -40,8 +38,7 @@ class ShelterReviewsController < ApplicationController
   end
 
   private
-
-  def shelter_review_params
-    params.permit(:title, :rating, :content, :picture)
-  end
+    def shelter_review_params
+      params.permit(:title, :rating, :content, :picture)
+    end
 end
