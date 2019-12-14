@@ -1,5 +1,4 @@
 class FavoritesController < ApplicationController
-
   def index
     @pets_with_apps = Pet.find_all_with_applications
     session[:favorites] ||= []
