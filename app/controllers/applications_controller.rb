@@ -33,15 +33,15 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
   end
 
-private
-  def application_params
-    params.permit(:name, :address, :city, :state, :zip, :phone_number, :description)
-  end
-
-  def require_pets
-    if !params[:pets_applied_for]
-      flash[:notice] = "Please fill out all fields!"
-      redirect_to "/applications/new"
+  private
+    def application_params
+      params.permit(:name, :address, :city, :state, :zip, :phone_number, :description)
     end
-  end
+
+    def require_pets
+      if !params[:pets_applied_for]
+        flash[:notice] = "Please fill out all fields!"
+        redirect_to "/applications/new"
+      end
+    end
 end
