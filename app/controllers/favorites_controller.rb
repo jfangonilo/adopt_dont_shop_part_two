@@ -1,12 +1,11 @@
 class FavoritesController < ApplicationController
   def index
-    @pets_with_apps = Pet.find_all_with_applications
-    session[:favorites] ||= []
-    favorite_ids = session[:favorites]
-    @pets = Pet.find(favorite_ids)
-    if @pets.empty?
+    @pets = Pet.find(favorites.contents)
+    if favorites.empty?
       flash.now[:notice] = "How could you be so heartless??? You don't have any favorites yet!"
     end
+    @pets_applied_for = Pet.all_with_applications
+    @pets_pending = Pet.all_with_pending_application
   end
 
   def show
