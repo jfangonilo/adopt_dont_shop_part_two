@@ -3,7 +3,7 @@ class FavoritesController < ApplicationController
     @pets_with_apps = Pet.find_all_with_applications
     session[:favorites] ||= []
     favorite_ids = session[:favorites]
-    @pets = favorite_ids.map{|id| Pet.find(id)}
+    @pets = Pet.find(favorite_ids)
     if @pets.empty?
       flash.now[:notice] = "How could you be so heartless??? You don't have any favorites yet!"
     end
