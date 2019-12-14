@@ -2,7 +2,7 @@ class ApplicationsController < ApplicationController
   before_action :require_pets, only: [:create]
 
   def new
-    @favorite_pets = Pet.find(favorites.contents)
+    @favorite_pets = Pet.find(favorites.pets)
   end
 
   def create

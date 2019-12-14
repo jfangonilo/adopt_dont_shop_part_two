@@ -1,6 +1,6 @@
 class FavoritesController < ApplicationController
   def index
-    @pets = Pet.find(favorites.contents)
+    @pets = Pet.find(favorites.pets)
     if favorites.empty?
       flash.now[:notice] = "How could you be so heartless??? You don't have any favorites yet!"
     end
