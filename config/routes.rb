@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   # delete '/shelters/:shelter_id/reviews/:id', to: 'reviews#destroy'
 
   resources :pets do
-    resources :applications, only: [:show, :index]
+    resources :applications, only: [:index]
   end
   # get '/pets', to: 'pets#index'
   # get '/pets/:id', to: 'pets#show'
