@@ -1,11 +1,10 @@
 class FavoritesController < ApplicationController
   def index
-    @pets = Pet.find(favorites.pets)
-    if favorites.empty?
+    if favorites.pets.empty?
       flash.now[:notice] = "How could you be so heartless??? You don't have any favorites yet!"
+    else
+      @pets = Pet.find(favorites.pets)
     end
-    @pets_applied_for = Pet.all_with_applications
-    @pets_pending = Pet.all_with_pending_application
   end
 
   def show
