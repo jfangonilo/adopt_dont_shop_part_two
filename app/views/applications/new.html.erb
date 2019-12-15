@@ -5,7 +5,7 @@
       <% pets_applied_for ||= [] %>
       <section id="pet-<%= pet.name %>">
         <%= check_box_tag "pets_applied_for[]", pet.id %>
-        <%= label_tag pets_applied_for, "#{pet.name}" %>
+        <%= label_tag "#{pet.name}" %>
       </section>
     <% end %></h3>
 

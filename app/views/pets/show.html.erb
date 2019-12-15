@@ -1,9 +1,9 @@
-<h1><%= @pet.name %></h1>
+<h1><%= link_to @pet.name, "/pets/#{@pet.id}" %></h1>
 <section class = "wrapper">
   <p><%= link_to "See Applications", "/pets/#{@pet.id}/applications" %></p>
   <%= image_tag @pet.image %>
     <% if favorites.is_included?(@pet.id) %>
-      <%= button_to "Remove #{@pet.name} from Favorites", "/favorites/#{@pet.id}", method: :delete %>
+      <%= button_to "Remove #{@pet.name} from Favorites", "/favorites/#{@pet.id}", method: :patch %>
     <% else %>
       <%= button_to "Add #{@pet.name} to Favorites", "/favorites/#{@pet.id}", method: :patch %>
     <% end %>
@@ -16,7 +16,7 @@
     </section>
   <% else %>
     <section id="adoptable-status">
-      <p>Adoption Pending: <%= @pet.applicant_name %> </p>
+      <p>Adoption Pending: <%= link_to @pet.applicant_name, "/pets/#{@pet.applicant_id}" %> </p>
     </section>
   <% end %>
 

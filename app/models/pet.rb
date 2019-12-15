@@ -28,12 +28,12 @@ class Pet < ApplicationRecord
     order(adoptable: :DESC)
   end
 
-  def self.find_all_with_applications
+  def self.all_with_applications
     joins(:applications).distinct
   end
 
   def self.all_with_pending_application
-    joins(:pet_applications).where("pet_applications.pending = true")
+    joins(:pet_applications).where(pet_applications: {pending: true})
   end
 
   def applicant_name
@@ -45,6 +45,10 @@ class Pet < ApplicationRecord
   end
 
   def pending_adoption?
-    true if pet_applications.find_by(pending: :true)
+    pet_applications.where(pending: :true).any?
+  end
+
+  def find_application(id)
+    pet_applications.find_by(application_id: id)
   end
 end

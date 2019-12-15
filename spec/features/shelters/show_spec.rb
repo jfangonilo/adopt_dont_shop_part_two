@@ -4,7 +4,7 @@ describe "As a visitor, when I visit /shelters/:id," do
   before :each do
     @shelter_1  = create(:random_shelter)
     @pet        = create(:random_pet, shelter: @shelter_1)
-    @reviews    = create_list(:random_shelter_review, 3, shelter: @shelter_1)
+    @reviews    = create_list(:random_review, 3, shelter: @shelter_1)
 
     visit "shelters/#{@shelter_1.id}"
   end
@@ -40,7 +40,7 @@ describe "As a visitor, when I visit /shelters/:id," do
   it "I can create a new shelter review" do
     click_link "Add a Review"
 
-    expect(current_path).to eq("/shelters/#{@shelter_1.id}/shelter_reviews/new")
+    expect(current_path).to eq("/shelters/#{@shelter_1.id}/reviews/new")
     expect(page).to have_content("New Review")
 
     review_title = "Best shelter ever!"
@@ -56,7 +56,7 @@ describe "As a visitor, when I visit /shelters/:id," do
     click_button "Submit Review"
 
     expect(current_path).to eq("/shelters/#{@shelter_1.id}")
-    new_review = @shelter_1.shelter_reviews.last
+    new_review = @shelter_1.reviews.last
 
     within "#review-#{new_review.id}" do
       expect(page).to have_content(review_title)
@@ -82,7 +82,7 @@ describe "As a visitor, when I visit /shelters/:id," do
   end
 
   it "I can see all shelter reviews and their traits" do
-    @reviews  = create_list(:random_shelter_review, 3, shelter: @shelter_1)
+    @reviews  = create_list(:random_review, 3, shelter: @shelter_1)
 
     visit "/shelters/#{@shelter_1.id}"
 
@@ -101,7 +101,7 @@ describe "As a visitor, when I visit /shelters/:id," do
       click_link "Edit Review"
     end
 
-    expect(current_path).to eq "/shelters/#{@shelter_1.id}/shelter_reviews/#{@reviews[0].id}/edit"
+    expect(current_path).to eq "/shelters/#{@shelter_1.id}/reviews/#{@reviews[0].id}/edit"
   end
 
   it "has a link to delete each review" do
@@ -176,9 +176,9 @@ describe "As a visitor, when I visit /shelters/:id," do
 
   it "displays average review rating" do
     shelter = create(:random_shelter)
-    review_1 = create(:random_shelter_review, rating: 1, shelter: shelter)
-    review_2 = create(:random_shelter_review, rating: 4, shelter: shelter)
-    review_3 = create(:random_shelter_review, rating: 5, shelter: shelter)
+    review_1 = create(:random_review, rating: 1, shelter: shelter)
+    review_2 = create(:random_review, rating: 4, shelter: shelter)
+    review_3 = create(:random_review, rating: 5, shelter: shelter)
 
     visit "/shelters/#{shelter.id}"
 

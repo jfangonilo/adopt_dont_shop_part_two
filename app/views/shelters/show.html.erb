@@ -1,8 +1,6 @@
 <h1><%= link_to @shelter.name, "/shelters/#{@shelter.id}/pets" %></h1>
-
 <section class = "wrapper">
   <h2><%= @shelter.address %> <%= @shelter.city %>, <%= @shelter.state %> <%= @shelter.zip %></h2>
-
   <section id = "shelter">
     <p><%= link_to "Update", "/shelters/#{@shelter.id}/edit" %>
     <% if @shelter.pets_pending? %>
@@ -11,21 +9,19 @@
       <%= link_to "Delete", "/shelters/#{@shelter.id}", method: "delete" %></p>
     <% end %><br>
     <section id = "shelter-statistics">
-      <h3>Count of Pets: <%= @shelter.pet_count %></h3>
-      <h3>Average Review Rating: <%= @shelter.average_rating %></h3>
-      <h3>Number of Applications Open: <%= @shelter.applications_count %></h3>
-
+      <h4>Count of Pets: <%= @shelter.pet_count %></h4>
+      <h4>Average Review Rating: <%= @shelter.average_rating.round(2) %></h4>
+      <h4>Number of Applications Open: <%= @shelter.applications_count %></h4>
     </section>
-    <h3><%= link_to "Add a Review", "/shelters/#{@shelter.id}/shelter_reviews/new" %></h3>
+    <h3><%= link_to "Add a Review", "/shelters/#{@shelter.id}/reviews/new" %></h3>
   </section>
-
-  <% @shelter.shelter_reviews.each do |review| %>
+  <% @shelter.reviews.each do |review| %>
     <section id="review-<%= review.id %>">
       <h3><%= review.title %> - <%= review.rating %>/5</h3>
       <p><%= review.content %></p>
       <%= image_tag review.picture %><br>
-      <p><%= link_to "Edit Review", "/shelters/#{@shelter.id}/shelter_reviews/#{review.id}/edit" %>
-      <%= link_to "Delete Review", "/shelters/#{@shelter.id}/shelter_reviews/#{review.id}", method: :delete %></p><br>
+      <p><%= link_to "Edit Review", "/shelters/#{@shelter.id}/reviews/#{review.id}/edit" %>
+      <%= link_to "Delete Review", "/shelters/#{@shelter.id}/reviews/#{review.id}", method: :delete %></p><br>
     </section>
   <% end %>
 </section>

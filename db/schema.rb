@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191210042005) do
+ActiveRecord::Schema.define(version: 20191214213531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20191210042005) do
     t.index ["shelter_id"], name: "index_pets_on_shelter_id"
   end
 
-  create_table "shelter_reviews", force: :cascade do |t|
+  create_table "reviews", force: :cascade do |t|
     t.string "title"
     t.integer "rating"
     t.string "content"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20191210042005) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "shelter_id"
-    t.index ["shelter_id"], name: "index_shelter_reviews_on_shelter_id"
+    t.index ["shelter_id"], name: "index_reviews_on_shelter_id"
   end
 
   create_table "shelters", force: :cascade do |t|
@@ -72,5 +72,5 @@ ActiveRecord::Schema.define(version: 20191210042005) do
   add_foreign_key "pet_applications", "applications"
   add_foreign_key "pet_applications", "pets"
   add_foreign_key "pets", "shelters", on_delete: :cascade
-  add_foreign_key "shelter_reviews", "shelters", on_delete: :cascade
+  add_foreign_key "reviews", "shelters", on_delete: :cascade
 end

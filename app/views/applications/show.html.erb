@@ -1,4 +1,4 @@
-<h1><%= @application.name %></h1>
+<h1><%= link_to @application.name, "/applications/#{@application.id}" %></h1>
 <section class = "wrapper">
   <p><%= @application.address %> <%= @application.city %>, <%= @application.state %> <%= @application.zip %></p>
   <p><%= @application.phone_number %></p>
@@ -8,7 +8,7 @@
       <p><%= link_to pet.name, "/pets/#{pet.id}" %> -
       <% if pet.adoptable? %>
         <%= link_to "Approve Application", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %>
-      <% elsif pet.adoptable? == false && @application.id == pet.applicant_id %>
+      <% elsif !pet.adoptable? && @application.id == pet.applicant_id %>
         <%= link_to "Revoke Application", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch %>
         <p>You are already approved!</p>
       <% else %>

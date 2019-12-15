@@ -6,14 +6,14 @@ class Shelter < ApplicationRecord
   validates_presence_of :zip
 
   has_many :pets, dependent: :destroy
-  has_many :shelter_reviews
+  has_many :reviews
 
   def pet_count
     pets.length
   end
 
   def self.alpha_sort
-    order(name: :ASC)
+    order(:name)
   end
 
   def pets_pending?
@@ -21,7 +21,7 @@ class Shelter < ApplicationRecord
   end
 
   def average_rating
-    shelter_reviews.average(:rating)
+    reviews.average(:rating)
   end
 
   def applications_count

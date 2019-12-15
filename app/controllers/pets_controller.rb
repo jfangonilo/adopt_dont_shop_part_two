@@ -1,6 +1,11 @@
 class PetsController < ApplicationController
   def index
-    @pets = Pet.sort_adoptable
+    if params[:shelter_id]
+      @shelter = Shelter.find(params[:shelter_id])
+      @pets = @shelter.pets
+    else
+      @pets = Pet.all
+    end
   end
 
   def show
@@ -25,7 +30,6 @@ class PetsController < ApplicationController
   def update
     pet = Pet.find(params[:id])
     pet.update(pet_params)
-    pet.save
     redirect_to "/pets/#{pet.id}"
     flash[:error] = pet.errors.full_messages.to_sentence
   end
@@ -33,18 +37,18 @@ class PetsController < ApplicationController
   def destroy
     pet_id = params[:id]
     pet = Pet.find(pet_id)
-    unless pet.pending_adoption?
+    if pet.pending_adoption?
+      redirect_back(fallback_location: "/pets/#{pet_id}")
+      flash[:notice] = "Approved application pending. Cannot delete #{pet.name}"
+    else
       favorites.delete_pets([pet_id])
       Pet.destroy(pet_id)
       redirect_to "/pets"
-    else
-      redirect_back(fallback_location: "/pets/#{pet_id}")
-      flash[:notice] = "Approved application pending. Cannot delete #{pet.name}"
     end
   end
 
-private
-  def pet_params
-    params.permit(:image, :name, :description, :approximate_age, :sex)
-  end
+  private
+    def pet_params
+      params.permit(:image, :name, :description, :approximate_age, :sex)
+    end
 end
