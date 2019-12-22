@@ -1,17 +1,19 @@
 <h1>Favorites</h1>
 <section class = "wrapper">
   <section id = "favorites">
-  <% if !favorites.empty? %>
-    <% @pets.each do |pet| %>
-    <section id = "favorite-<%= pet.id %>">
-      <h2><%= pet.name %></h2>
-      <p><%= image_tag pet.image %></p>
-      <%= button_to "Remove #{pet.name} from Favorites", "/favorites/#{pet.id}", method: :patch %>
-    </section>
+    <% if !favorites.empty? %>
+
+      <% @pets.each do |pet| %>
+      <section id = "favorite-<%= pet.id %>">
+        <h2><%= pet.name %></h2>
+        <p><%= image_tag pet.image %></p>
+        <%= button_to "Remove #{pet.name} from Favorites", "/favorites/#{pet.id}", method: :patch %>
+      </section>
+      <% end %>
+
+      <h3><%= link_to "Remove All Favorites", "/favorites", method: :delete %></h3>
+      <%= button_to "Start Adoption Application", '/applications/new', method: :get %>
     <% end %>
-  <h3><%= link_to "Remove All Favorites", "/favorites", method: :delete %></h3>
-  <%= button_to "Start Adoption Application", '/applications/new', method: :get %>
-  <% end %>
   </section>
 
   <section id = "favorites-list">
